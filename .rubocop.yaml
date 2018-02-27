@@ -17,5 +17,8 @@ Style/SignalException:
   EnforcedStyle: only_raise
 
 Style/StringLiterals:
-  EnforcedStyle: double_quotes
-  file: 'file:///Volumes/Data/projects/fog-packet/lib/fog-packet.rb'
+  Enabled: false
+  # EnforcedStyle: double_quotes
+
+Style/IndentationWidth:
+  Width: 2
