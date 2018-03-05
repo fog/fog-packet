@@ -9,20 +9,20 @@ module Fog
           }
 
           request(
-            :expects => [201],
-            :method => 'POST',
-            :path => '/projects',
-            :body => Fog::JSON.encode(project)
+              :expects => [201],
+              :method => 'POST',
+              :path => '/projects',
+              :body => Fog::JSON.encode(project)
           )
         end
       end
 
       class Mock
         def create_project(options)
-          response        = Excon::Response.new
+          response = Excon::Response.new
           response.status = 201
           response
-          end
+        end
       end
     end
   end

@@ -6,7 +6,7 @@ Fog.mock!
 class TestProjects < Minitest::Test
 
   def self.test_order
-   :alpha
+    :alpha
   end
 
   def setup
