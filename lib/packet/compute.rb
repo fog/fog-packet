@@ -6,7 +6,6 @@ module Fog
       SUCCESS_CODES = [200, 201, 202].freeze
 
 
-      autoload :Mock, File.expand_path('../mock', __FILE__)
 
       requires :packet_token
 
