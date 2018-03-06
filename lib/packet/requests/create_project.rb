@@ -9,10 +9,10 @@ module Fog
           }
 
           request(
-              :expects => [201],
-              :method => 'POST',
-              :path => '/projects',
-              :body => Fog::JSON.encode(project)
+            expects: [201],
+            method: 'POST',
+            path: '/projects',
+            body: Fog::JSON.encode(project)
           )
         end
       end

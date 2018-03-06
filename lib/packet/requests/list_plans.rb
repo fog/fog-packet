@@ -5,17 +5,18 @@ module Fog
       class Real
         def list_plans
           request(
-              expects: [200],
-              method: 'GET',
-              path: '/plans'
+            expects: [200],
+            method: 'GET',
+            path: '/plans'
           )
         end
 
         def get_project_plans(project_id)
+          p '/projects/'+project_id +'/plans'
           request(
-              expects: [200],
-              method: 'GET',
-              path: '/projects/#{project_id}/plans'
+            expects: [200],
+            method: 'GET',
+            path: '/projects/'+project_id +'/plans'
           )
         end
       end

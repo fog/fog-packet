@@ -17,20 +17,19 @@ class TestProjects < Minitest::Test
 
   end
 
-
   def test_list_projects
 
     # Perform Request
     response = @compute.list_projects
 
     # Assertions
-    assert response.body['projects'].length > 0
+    assert !response.body['projects'].empty?
   end
 
   def test_create_project
 
     options = {
-        name: 'test_jg'
+      name: 'test_jg'
     }
 
     # Perform Request
@@ -38,6 +37,14 @@ class TestProjects < Minitest::Test
 
     # Assertions
     assert_equal response.status, 201
+  end
+
+  def test_get_project
+    response = @compute.get_project('93125c2a-8b78-4d4f-a3c4-7367d6b7cca8')
+
+    # Assertions
+    assert_equal response.status, 200
+    assert_equal response.body['id'], '93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'
   end
 
 

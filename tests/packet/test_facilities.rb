@@ -20,17 +20,18 @@ class
   def test_list_plans
 
     # Perform Request
-    response = @compute.list_plans()
+    response = @compute.list_facilities()
 
     # Assertions
-    assert !response.body['plans'].empty?
+    assert !response.body['facilities'].empty?
 
   end
 
-  def test_list_project_plans
-    response = @compute.get_project_plans("ttt")
+  def test_list_project_facilities
+    response = @compute.get_project_facilities("ttt")
+
     # Assertions
-    assert !response.body['plans'].empty?
+    assert !response.body['facilities'].empty?
   end
 
 

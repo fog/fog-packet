@@ -23,13 +23,22 @@ module Fog
       model :project
       collection :projects
 
+      model :facility
+      collection :facilities
+
       # Requests
       request_path 'packet/requests'
 
       request :list_plans
       request :list_projects
+      request :get_project
       request :create_project
       request :delete_project
+      request :list_facilities
+
+      request :list_project_devices
+      # request :list_organization_devices
+      # request :get_device
 
       class Real
         def initialize(options = {})
