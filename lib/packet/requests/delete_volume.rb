@@ -4,7 +4,7 @@ module Fog
       class Real
         def delete_volume(id)
           request(
-            expects: [204],
+              expects: [204],
             method: 'DELETE',
             path: '/storage/' + id
           )

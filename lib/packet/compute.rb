@@ -48,6 +48,8 @@ module Fog
       request :create_volume
       request :list_volumes
       request :delete_volume
+      request :attach_volume
+      request :detach_volume
 
       class Real
         def initialize(options = {})
