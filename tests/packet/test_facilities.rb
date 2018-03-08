@@ -1,10 +1,10 @@
 require_relative '../../lib/fog-packet'
 require 'minitest/autorun'
 
-# Fog.mock!
+Fog.mock!
 
 class
-  TestFacilities < Minitest::Test
+TestFacilities < Minitest::Test
 
   def self.test_order
     :alpha
@@ -18,12 +18,8 @@ class
 
 
   def test_list_plans
-
-    # Perform Request
     response = @compute.list_facilities()
 
-    p response.body
-    # Assertions
     assert !response.body['facilities'].empty?
 
   end
@@ -31,9 +27,6 @@ class
   def test_list_project_facilities
     response = @compute.get_project_facilities("ttt")
 
-    # Assertions
     assert !response.body['facilities'].empty?
   end
-
-
 end

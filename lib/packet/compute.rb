@@ -40,12 +40,19 @@ module Fog
       request :get_device
       request :delete_device
       request :update_device
+      request :reboot_device
+      request :poweron_device
+      request :poweroff_device
 
+      request :get_volume
+      request :create_volume
+      request :list_volumes
+      request :delete_volume
 
       class Real
         def initialize(options = {})
           @packet_token = options[:packet_token]
-          @base_url = 'https://api.packet.net/projects'
+          @base_url = 'https://api.packet.net/'
           @version = ''
           @header = {
               'X-Auth-Token' => @packet_token,

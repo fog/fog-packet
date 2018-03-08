@@ -1,7 +1,7 @@
 require_relative '../../lib/fog-packet'
 require 'minitest/autorun'
 
-# Fog.mock!
+Fog.mock!
 
 class TestProjects < Minitest::Test
 
@@ -35,17 +35,15 @@ class TestProjects < Minitest::Test
     # Perform Request
     response = @compute.create_project(options)
 
+    @@project_id = response.body['id']
     # Assertions
     assert_equal response.status, 201
   end
 
   def test_get_project
-    response = @compute.get_project('93125c2a-8b78-4d4f-a3c4-7367d6b7cca8')
+    response = @compute.get_project(@@project_id)
 
-    # Assertions
     assert_equal response.status, 200
-    assert_equal response.body['id'], '93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'
+    assert_equal response.body['id'], @@project_id
   end
-
-
 end

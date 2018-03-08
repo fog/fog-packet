@@ -1,6 +1,6 @@
 require_relative '../../lib/fog-packet'
 require 'minitest/autorun'
-require 'json'
+# require 'json'
 
 Fog.mock!
 
@@ -41,14 +41,11 @@ class TestDevices < Minitest::Test
   def test_get_device
     response = @compute.get_device(@@device_id)
 
-    p @@device_id
-    p response.body
     assert_equal 200, response.status
     assert_equal @@device_id, response.body['id']
   end
 
   def test_update_device
-    sleep(60)
     options = {
       hostname: 'test02'
     }
@@ -58,10 +55,51 @@ class TestDevices < Minitest::Test
     assert_equal options[:hostname], response.body['hostname']
   end
 
+  def test_reboot_device
+    response = @compute.reboot_device(@@device_id)
+
+    assert_equal 202, response.status
+
+    unless Fog.mock!
+      loop do
+        response = @compute.get_device(@@device_id)
+        break if response.body['state'] == 'active'
+        sleep(3)
+      end
+    end
+  end
+
+  def test_poweroff_device
+    response = @compute.poweroff_device(@@device_id)
+
+    assert_equal 202, response.status
+
+    unless Fog.mock!
+      loop do
+        response = @compute.get_device(@@device_id)
+        break if response.body['state'] == 'inactive'
+        sleep(3)
+      end
+    end
+  end
+
+  def test_poweron_device
+    response = @compute.poweron_device(@@device_id)
+
+    assert_equal 202, response.status
+
+    unless Fog.mock!
+      loop do
+        response = @compute.get_device(@@device_id)
+        break if response.body['state'] == 'active'
+        sleep(3)
+      end
+    end
+  end
+
   def test_delete_device
     response = @compute.delete_device(@@device_id)
 
     assert_equal 204, response.status
   end
 end
-
