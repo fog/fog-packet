@@ -2,7 +2,7 @@ require_relative '../../lib/fog-packet'
 require 'minitest/autorun'
 require 'json'
 
-# Fog.mock!
+Fog.mock!
 
 class TestDevices < Minitest::Test
   def self.test_order
@@ -43,8 +43,8 @@ class TestDevices < Minitest::Test
 
     p @@device_id
     p response.body
-    assert_equal @@device_id, response.body['id']
     assert_equal 200, response.status
+    assert_equal @@device_id, response.body['id']
   end
 
   def test_update_device
