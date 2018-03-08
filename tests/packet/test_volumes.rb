@@ -61,10 +61,9 @@ class TestProjects < Minitest::Test
     assert !response.body['volumes'].empty?
   end
 
-  def test_attach_volume
+  def test_m_attach_volume
     device_id = '0877721e-d48b-418b-bab7-62e67de452c7'
-    volume_id = '3d1edaf3-2315-44ae-9591-6edcbbd0f731'
-    response = @compute.attach_volume(volume_id, device_id)
+    response = @compute.attach_volume(@@volume_id, device_id)
     @@attachment_id = response.body['id']
 
     assert_equal 201, response.status
@@ -73,8 +72,6 @@ class TestProjects < Minitest::Test
   def test_detach_volume
     @@attachment_id= '8e4bd895-fba3-4a59-b9f8-dd20fc6568d0'
     response = @compute.detach_volume(@@attachment_id)
-
-    p response.status
     assert_equal 204, response.status
   end
 
