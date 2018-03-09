@@ -51,6 +51,11 @@ module Fog
       request :attach_volume
       request :detach_volume
 
+      request :reserve_ip
+      request :list_ips
+      request :assign_ip
+      request :unassign_ip
+
       class Real
         def initialize(options = {})
           @packet_token = options[:packet_token]
@@ -74,6 +79,7 @@ module Fog
                                            headers: @header,
                                            body: params[:body],
                                            query: params[:params])
+
           rescue Excon::Errors::Unauthorized => error
             raise error
           rescue Excon::Errors::HTTPStatusError => error
