@@ -1,8 +1,7 @@
 require_relative '../../lib/fog-packet'
 require 'minitest/autorun'
-# require 'json'
 
-Fog.mock!
+# Fog.mock!
 
 class TestDevices < Minitest::Test
   def self.test_order
