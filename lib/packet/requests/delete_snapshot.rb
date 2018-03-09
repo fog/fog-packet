@@ -3,7 +3,6 @@ module Fog
     class Packet
       class Real
         def delete_snapshot(storage_id, snapshot_id)
-          p '/storage/' + storage_id + '/snapshots/' + snapshot_id
           request(
             expects: [204],
             method: 'DELETE',

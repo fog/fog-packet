@@ -58,16 +58,12 @@ class TestDevices < Minitest::Test
 
     response = @compute.assign_ip(@@device_id, options)
 
-    p response.status
-    p response.body
     assert_equal 201, response.status
   end
 
   def test_d_unassign_ip
     response = @compute.unassign_ip(@@ip_id)
 
-    p response.status
-    p response.body
     assert_equal 204, response.status
 
   end

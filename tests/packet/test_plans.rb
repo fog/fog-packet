@@ -3,8 +3,7 @@ require 'minitest/autorun'
 
 Fog.mock!
 
-class
-  TestPlans < Minitest::Test
+class TestPlans < Minitest::Test
 
   def self.test_order
     :alpha
