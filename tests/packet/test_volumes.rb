@@ -1,7 +1,7 @@
 require_relative '../../lib/fog-packet'
 require 'minitest/autorun'
 
-# Fog.mock!
+Fog.mock!
 
 class TestProjects < Minitest::Test
   def self.test_order
