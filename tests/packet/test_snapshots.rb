@@ -25,7 +25,6 @@ class TestSnapshots < Minitest::Test
 
 
     @@volume_id = response.body['id']
-    p @@volume_id
 
     unless Fog.mock!
       loop do

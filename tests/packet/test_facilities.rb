@@ -22,10 +22,4 @@ class TestFacilities < Minitest::Test
     assert !response.body['facilities'].empty?
 
   end
-
-  def test_list_project_facilities
-    response = @compute.get_project_facilities("ttt")
-
-    assert !response.body['facilities'].empty?
-  end
 end

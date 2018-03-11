@@ -12,14 +12,50 @@ module Fog
       end
 
       class Mock
-
         def list_ips(project_id)
           response = Excon::Response.new
           response.status = 200
-          response.body = {'ip_addresses'=>[{'id'=>'11efb411-c76b-47d8-ba75-20a51c6b0505', 'address_family'=>6, 'netmask'=>'ffff:ffff:ffff:ff00:0000:0000:0000:0000', 'created_at'=>'2018-03-06T12:36:06Z', 'public'=>true, 'cidr'=>56, 'management'=>false, 'manageable'=>true, 'enabled'=>true, 'addon'=>false, 'bill'=>false, 'project'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'project_lite'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'assignments'=>[], 'facility'=>{'id'=>'e1e9c52e-a0bc-4117-b996-0fc94843ea09', 'name'=>'Parsippany, NJ', 'code'=>'ewr1', 'features'=>%w[baremetal storage backend_transfers layer_2], 'address'=>nil, 'ip_ranges'=>['2604:1380::/36', '147.75.192.0/21', '147.75.64.0/22', '147.75.72.0/22', '147.75.76.0/22', '147.75.104.0/22', '147.75.96.0/20']}, 'network'=>'2604:1380:0:8900::', 'address'=>'2604:1380:0:8900::2', 'gateway'=>'2604:1380:0:8900::1', 'available'=>'/ips/11efb411-c76b-47d8-ba75-20a51c6b0505/available', 'href'=>'/ips/11efb411-c76b-47d8-ba75-20a51c6b0505'}, {'id'=>'3629064e-869e-40f7-ba22-bb8692df4827', 'address_family'=>6, 'netmask'=>'ffff:ffff:ffff:ff00:0000:0000:0000:0000', 'created_at'=>'2018-03-01T10:50:40Z', 'public'=>true, 'cidr'=>56, 'management'=>false, 'manageable'=>true, 'enabled'=>true, 'addon'=>false, 'bill'=>false, 'project'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'project_lite'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'assignments'=>[], 'facility'=>{'id'=>'2b70eb8f-fa18-47c0-aba7-222a842362fd', 'name'=>'Sunnyvale, CA', 'code'=>'sjc1', 'features'=>%w[baremetal storage layer_2 backend_transfers], 'address'=>{'href'=>'#9dba11a6-0a26-4993-901b-df253713b89e'}, 'ip_ranges'=>['2604:1380:1000::/36', '147.75.200.0/22', '147.75.108.0/22', '147.75.68.0/22', '147.75.88.0/22']}, 'network'=>'2604:1380:1000:fa00::', 'address'=>'2604:1380:1000:fa00::2', 'gateway'=>'2604:1380:1000:fa00::1', 'available'=>'/ips/3629064e-869e-40f7-ba22-bb8692df4827/available', 'href'=>'/ips/3629064e-869e-40f7-ba22-bb8692df4827'}, {'id'=>'b7a225c1-b004-49e5-b827-93cd98bc950e', 'address_family'=>6, 'netmask'=>'ffff:ffff:ffff:ff00:0000:0000:0000:0000', 'created_at'=>'2018-03-06T10:20:32Z', 'public'=>true, 'cidr'=>56, 'management'=>false, 'manageable'=>true, 'enabled'=>true, 'addon'=>false, 'bill'=>false, 'project'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'project_lite'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'assignments'=>[], 'facility'=>{'id'=>'8e6470b3-b75e-47d1-bb93-45b225750975', 'name'=>'Amsterdam, NL', 'code'=>'ams1', 'features'=>%w[baremetal storage], 'address'=>{'href'=>'#0688e909-647e-4b21-bdf2-fc056d993fc5'}, 'ip_ranges'=>['2604:1380:2000::/36', '147.75.204.0/23', '147.75.100.0/22', '147.75.80.0/22', '147.75.32.0/23']}, 'network'=>'2604:1380:2000:3200::', 'address'=>'2604:1380:2000:3200::2', 'gateway'=>'2604:1380:2000:3200::1', 'available'=>'/ips/b7a225c1-b004-49e5-b827-93cd98bc950e/available', 'href'=>'/ips/b7a225c1-b004-49e5-b827-93cd98bc950e'}, {'id'=>'6abc204c-ef9a-4cd2-a1d5-07e8640cbf1f', 'address_family'=>4, 'netmask'=>'255.255.255.128', 'created_at'=>'2018-03-06T10:20:32Z', 'public'=>false, 'cidr'=>25, 'management'=>false, 'manageable'=>true, 'enabled'=>true, 'addon'=>false, 'bill'=>false, 'project'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'project_lite'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'assignments'=>[], 'facility'=>{'id'=>'8e6470b3-b75e-47d1-bb93-45b225750975', 'name'=>'Amsterdam, NL', 'code'=>'ams1', 'features'=>%w[baremetal storage], 'address'=>{'href'=>'#0688e909-647e-4b21-bdf2-fc056d993fc5'}, 'ip_ranges'=>['2604:1380:2000::/36', '147.75.204.0/23', '147.75.100.0/22', '147.75.80.0/22', '147.75.32.0/23']}, 'network'=>'10.80.74.0', 'address'=>'10.80.74.2', 'gateway'=>'10.80.74.1', 'available'=>'/ips/6abc204c-ef9a-4cd2-a1d5-07e8640cbf1f/available', 'href'=>'/ips/6abc204c-ef9a-4cd2-a1d5-07e8640cbf1f'}, {'id'=>'458af318-492c-4396-8ee1-4eed3e5907ef', 'address_family'=>4, 'netmask'=>'255.255.255.128', 'created_at'=>'2018-03-01T10:50:40Z', 'public'=>false, 'cidr'=>25, 'management'=>false, 'manageable'=>true, 'enabled'=>true, 'addon'=>false, 'bill'=>false, 'project'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'project_lite'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'assignments'=>[], 'facility'=>{'id'=>'2b70eb8f-fa18-47c0-aba7-222a842362fd', 'name'=>'Sunnyvale, CA', 'code'=>'sjc1', 'features'=>%w[baremetal storage layer_2 backend_transfers], 'address'=>{'href'=>'#9dba11a6-0a26-4993-901b-df253713b89e'}, 'ip_ranges'=>['2604:1380:1000::/36', '147.75.200.0/22', '147.75.108.0/22', '147.75.68.0/22', '147.75.88.0/22']}, 'network'=>'10.88.133.0', 'address'=>'10.88.133.2', 'gateway'=>'10.88.133.1', 'available'=>'/ips/458af318-492c-4396-8ee1-4eed3e5907ef/available', 'href'=>'/ips/458af318-492c-4396-8ee1-4eed3e5907ef'}, {'id'=>'d0081931-6db9-4dcf-952d-565e98f87d15', 'address_family'=>4, 'netmask'=>'255.255.255.128', 'created_at'=>'2018-03-06T12:36:06Z', 'public'=>false, 'cidr'=>25, 'management'=>false, 'manageable'=>true, 'enabled'=>true, 'addon'=>false, 'bill'=>false, 'project'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'project_lite'=>{'href'=>'/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'}, 'assignments'=>[], 'facility'=>{'id'=>'e1e9c52e-a0bc-4117-b996-0fc94843ea09', 'name'=>'Parsippany, NJ', 'code'=>'ewr1', 'features'=>%w[baremetal storage backend_transfers layer_2], 'address'=>nil, 'ip_ranges'=>['2604:1380::/36', '147.75.192.0/21', '147.75.64.0/22', '147.75.72.0/22', '147.75.76.0/22', '147.75.104.0/22', '147.75.96.0/20']}, 'network'=>'10.99.80.128', 'address'=>'10.99.80.130', 'gateway'=>'10.99.80.129', 'available'=>'/ips/d0081931-6db9-4dcf-952d-565e98f87d15/available', 'href'=>'/ips/d0081931-6db9-4dcf-952d-565e98f87d15'}]}
+          response.body = {
+            'ip_addresses' => [
+              {
+                'id' => '11efb411-c76b-47d8-ba75-20a51c6b0505',
+                'address_family' => 6,
+                'netmask' => 'ffff:ffff:ffff:ff00:0000:0000:0000:0000',
+                'created_at' => '2018-03-06T12:36:06Z',
+                'public' => true,
+                'cidr' => 56,
+                'management' => false,
+                'manageable' => true,
+                'enabled' => true,
+                'addon' => false,
+                'bill' => false,
+                'project' => {
+                  'href' => '/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'
+                },
+                'project_lite' => {
+                  'href' => '/projects/93125c2a-8b78-4d4f-a3c4-7367d6b7cca8'
+                },
+                'assignments' => [],
+                'facility' => {
+                  'id' => 'e1e9c52e-a0bc-4117-b996-0fc94843ea09',
+                  'name' => 'Parsippany, NJ',
+                  'code' => 'ewr1',
+                  'features' => %w[baremetal storage backend_transfers layer_2],
+                  'address' => nil,
+                  'ip_ranges' => [
+                    '2604:1380::/36'
+                  ]
+                },
+                'network' => '2604:1380:0:8900::',
+                'address' => '2604:1380:0:8900::2',
+                'gateway' => '2604:1380:0:8900::1',
+                'available' => '/ips/11efb411-c76b-47d8-ba75-20a51c6b0505/available',
+                'href' => '/ips/11efb411-c76b-47d8-ba75-20a51c6b0505'
+              }
+            ]
+          }
           response
         end
-
       end
     end
   end

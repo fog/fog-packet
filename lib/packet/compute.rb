@@ -34,7 +34,6 @@ module Fog
       request :delete_project
       request :list_facilities
 
-      request :list_project_devices
       request :create_device
       request :get_device
       request :delete_device
