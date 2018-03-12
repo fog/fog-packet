@@ -43,9 +43,9 @@ options = {
       facility: 'ewr1',
       plan: 'baremetal_0',
       operating_system: 'coreos_stable'
-    }
+}
 
-    response = @compute.create_device(@project_id, options)
+response = @compute.create_device(@project_id, options)
 ```
 
 Available parameters
@@ -54,7 +54,7 @@ Available parameters
 |---|---|---|---|
 | project_id | string | 	Project UUID  under which device will be created| Yes |
 | hostname | string | The hostname of the server. | Yes |
-| plan] | string | Plan UUID| Yes |
+| plan | string | Plan name| Yes |
 | facility | string | Facility code | Yes |
 | operating_system | string || No |
 | description | string | | No* |
@@ -95,7 +95,7 @@ Available parameters
 | NAME| TYPE | DESCRIPTION | REQUIRED |
 |---|---|---|---|
 | hostname | string | The hostname of the server. | Yes |
-| description | string | | No* |
+| description | string | | No |
 | billing_cycle | string | | No |
 | always_pxe | string | | No |
 | ipxe_script_url | string | | No |
@@ -121,8 +121,7 @@ response = @compute.poweroff_device(@@device_id)
 Powers on the specified device
 
 ```ruby
-    response = @compute.poweron_device(@@device_id)
-
+response = @compute.poweron_device(@@device_id)
 ```
 
 ###Delete a device
@@ -130,5 +129,188 @@ Powers on the specified device
 Deletes the specified devices
 
 ```ruby
-    response = @compute.delete_device(@@device_id)
+response = @compute.delete_device(@@device_id)
 ```
+##Volumes
+Creates a new volume
+
+```ruby
+options = {
+    facility: 'ewr1',
+    plan: 'storage_1',
+    size: 20,
+    description: 'test description',
+    billing_cycle: 'hourly'
+}
+
+response = @compute.create_volume(@project_id, options)
+```
+
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| facility | string | Facility code | Yes |
+| plan | string | Plan name| Yes |
+| size | int | Volume size| Yes |
+| description | string | | No |
+| billing_cycle | string | | No |
+| snapshot_policies | string | | No |
+
+
+###Retrieve a volume
+
+Gets a specified volume
+
+```ruby
+response = @compute.get_volume(@@volume_id)
+```
+
+###List volumes
+List all volumes in the specified project
+
+```ruby
+response = @compute.list_volumes(@project_id)
+```
+
+###Attach a volume
+
+Attaches a volume to the specified device
+
+```ruby
+response = @compute.attach_volume(@@volume_id, @@device_id)
+```
+
+###Detach a volume
+
+Detaches a volume from the specified device
+
+```ruby
+response = @compute.detach_volume(@@attachment_id)
+```
+
+###Delete a volume
+Deletes a specified volume
+
+```ruby
+response = @compute.delete_volume(@@volume_id)
+```
+
+##Snapshot
+
+###Create a snapshot of a volume
+Creates a snapshot of the specified volume
+
+```ruby
+response = @compute.create_snapshot(@@volume_id)
+```
+
+###List snapshots
+List all snapshots of the specified volume
+
+```ruby
+response = @compute.list_snapshots(@@volume_id)
+```
+
+###Delete a snapshot
+Deletes the specified snapshot
+```ruby
+response = @compute.delete_snapshot(@@volume_id, @@snapshot_id)
+```     
+
+##IP addresses
+
+###Reserve an IP address
+Reserve an IP address
+
+```ruby
+options = {
+  facility: 'ewr1',
+  quantity: 2,
+  type: 'global_ipv4',
+  comments: 'test comment'
+}
+
+response = @compute.reserve_ip(@project_id, options)
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| facility | string | Facility code | Yes |
+| quatity | int|  | Yes |
+| type | string |  | Yes |
+| comments | string |  | No |
+
+###Get IPs
+Retrives the list of IP addresses under the specified project
+
+```ruby
+response = @compute.list_ips(@project_id)
+```
+
+###Assign an IP address
+Assigns an IP address to the specified devices
+
+```ruby
+response = @compute.assign_ip(@@device_id, options)
+```
+
+###Unassign IP address
+Unassigns the specified IP address
+ 
+```ruby
+ response = @compute.unassign_ip(@@ip_id)
+```
+
+##Projects
+
+###Create a project
+
+Creates a new project
+
+```ruby
+ options = {
+      name: 'test'
+}
+
+response = @compute.create_project(options)
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| name | string | 	Name of the project| Yes |
+| payment_method_id | string |  | No |
+
+
+###Retrieve a project
+
+Gets project details
+
+```ruby
+response = @compute.get_project(@@project_id)
+
+```
+
+##Plans
+
+###List plans
+List all available plans of the account
+
+```ruby
+response = @compute.list_plans()
+```
+
+##Facilities
+
+###List facilities
+List all available facilities of the account
+
+```ruby
+response = @compute.list_facilities()
+```
+ 

@@ -37,10 +37,6 @@ class TestSnapshots < Minitest::Test
 
 
   def test_a_create_snapshot
-    unless Fog.mock!
-      sleep(5)
-    end
-
     response = @compute.create_snapshot(@@volume_id)
 
     assert_equal 202, response.status

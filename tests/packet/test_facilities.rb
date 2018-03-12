@@ -16,7 +16,7 @@ class TestFacilities < Minitest::Test
   end
 
 
-  def test_list_plans
+  def test_list_facilities
     response = @compute.list_facilities()
 
     assert !response.body['facilities'].empty?

@@ -76,7 +76,6 @@ class TestProjects < Minitest::Test
   end
 
   def test_e_detach_volume
-    @@attachment_id = '8e4bd895-fba3-4a59-b9f8-dd20fc6568d0'
     response = @compute.detach_volume(@@attachment_id)
     assert_equal 204, response.status
   end
