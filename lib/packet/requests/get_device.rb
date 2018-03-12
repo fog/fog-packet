@@ -165,7 +165,7 @@ module Fog
                 {
                   'id' => '8eb55ecb-73ed-4ff7-b933-3f7fe2ae1a4e',
                   'type' => 'NetworkBondPort',
-                  'name' => 'bond0',
+                  'name' => 'eth1',
                   'data' => {
                     'bonded' => true
                   },

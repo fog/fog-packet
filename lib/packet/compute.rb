@@ -61,6 +61,14 @@ module Fog
       request :delete_snapshot
       request :list_snapshots
 
+      request :create_virtual_network
+      request :list_virtual_networks
+      request :delete_virtual_network
+      request :assign_port
+      request :unassign_port
+      request :disbond_ports
+      request :bond_ports
+
       class Real
         def initialize(options = {})
           @packet_token = options[:packet_token]
