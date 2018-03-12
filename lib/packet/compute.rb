@@ -24,6 +24,9 @@ module Fog
       model :facility
       collection :facilities
 
+      model :device
+      collection :devices
+
       # Requests
       request_path 'packet/requests'
 

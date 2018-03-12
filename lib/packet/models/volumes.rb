@@ -10,11 +10,6 @@ module Fog
           response = service.list_volumes(project_id)
           load(response.body)
         end
-
-        def all(project_id, volume_id)
-          response = service.get_volume(project_id, volume_id)
-          load(response.body)
-        end
       end
     end
   end

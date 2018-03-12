@@ -23,6 +23,16 @@ module Fog
           super
         end
 
+        def save(payment_method_id)
+          requires :name
+
+          options = {}
+          options[:name] = name
+          options[:payment_method_id] = payment_method_id if payment_method_id
+
+          data = service.create_project(options)
+          true
+        end
       end
     end
   end

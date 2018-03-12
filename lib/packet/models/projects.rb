@@ -10,6 +10,11 @@ module Fog
           response = service.list_projects
           load(response.body)
         end
+
+        def get(id)
+          response = service.get_project(id)
+          load(response.body)
+        end
       end
     end
   end

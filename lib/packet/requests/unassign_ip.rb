@@ -3,7 +3,6 @@ module Fog
     class Packet
       class Real
         def unassign_ip(ip_id)
-          req['manageable'] = options[:manageable] if options[:manageable]
 
           request(
             expects: [204],

@@ -10,6 +10,11 @@ module Fog
           response = service.list_snapshots(volume_id)
           load(response.body)
         end
+
+        def get(id)
+          response = service.get_volume(id)
+          load(response.body)
+        end
       end
     end
   end
