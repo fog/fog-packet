@@ -38,7 +38,7 @@ class TestDevices < Minitest::Test
   end
 
   def test_b_get_device
-    response = @compute.devices.get(@@device_id)
+    response = @compute.get_device(@@device_id)
 
     assert_equal 200, response.status
     assert_equal @@device_id, response.body['id']

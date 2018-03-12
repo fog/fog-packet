@@ -2,7 +2,7 @@ module Fog
   module Compute
     class Packet
       class Real
-        def update_device(volume_id, options)
+        def update_volume(volume_id, options)
           device = Hash.new {}
           device['description'] = options[:description] if options[:description]
           device['billing_cycle'] = options[:billing_cycle] if options[:billing_cycle]
@@ -19,14 +19,14 @@ module Fog
       end
 
       class Mock
-        def update_device(volume_id, options)
+        def update_volume(volume_id, options)
           response = Excon::Response.new
           response.status = 200
           response.body = {
-            'id' => id,
+            'id' => volume_id,
             'name' => 'volume-870f9650',
             'description' => 'test description',
-            'size' => 20,
+            'size' => options[:size],
             'locked' => false,
             'billing_cycle' => 'hourly',
             'state' => 'active',

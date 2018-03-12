@@ -51,6 +51,7 @@ module Fog
       request :delete_volume
       request :attach_volume
       request :detach_volume
+      request :update_volume
 
       request :reserve_ip
       request :list_ips

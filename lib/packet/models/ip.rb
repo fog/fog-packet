@@ -29,7 +29,7 @@ module Fog
           options[:type] = type
           options[:facility] = facility
 
-          data = service.reserve_id(options)
+          data = service.reserve_ip(options)
         end
 
         def assign
