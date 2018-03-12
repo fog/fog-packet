@@ -33,7 +33,7 @@ Provide your credentials when creating a compute object:
 
 ## Devices
 
-###Create a device
+## Create a device
 
 Creates a new device and provisions it in our datacenter. 
 
@@ -72,7 +72,7 @@ Available parameters
 | user_ssh_keys | string | | No |
 | features | string | | No |
 
-###Retrieve a device
+## Retrieve a device
 
 Gets details about a specified device
 
@@ -80,7 +80,7 @@ Gets details about a specified device
  response = @compute.get_device(@@device_id)
 ```
 
-####Update a device
+## Update a device
 Updates a device
 ```ruby
 options = {
@@ -103,35 +103,37 @@ Available parameters
 | locked | string | | No |
 | spot_instance | string | | No |
 
-###Reboot device
+## Reboot device
 Reboots the specified device
 
 ```ruby
 response = @compute.reboot_device(@@device_id)
 ```
 
-###Power off device
+## Power off device
 Powers off the specified device
 
 ```ruby
 response = @compute.poweroff_device(@@device_id)
 ```
 
-###Power on device
+## Power on device
 Powers on the specified device
 
 ```ruby
 response = @compute.poweron_device(@@device_id)
 ```
 
-###Delete a device
+## Delete a device
 
 Deletes the specified devices
 
 ```ruby
 response = @compute.delete_device(@@device_id)
 ```
-##Volumes
+## Volumes
+
+## Create a volume
 Creates a new volume
 
 ```ruby
@@ -159,7 +161,7 @@ Available parameters
 | snapshot_policies | string | | No |
 
 
-###Retrieve a volume
+## Retrieve a volume
 
 Gets a specified volume
 
@@ -167,14 +169,14 @@ Gets a specified volume
 response = @compute.get_volume(@@volume_id)
 ```
 
-###List volumes
+## List volumes
 List all volumes in the specified project
 
 ```ruby
 response = @compute.list_volumes(@project_id)
 ```
 
-###Attach a volume
+## Attach a volume
 
 Attaches a volume to the specified device
 
@@ -182,7 +184,7 @@ Attaches a volume to the specified device
 response = @compute.attach_volume(@@volume_id, @@device_id)
 ```
 
-###Detach a volume
+## Detach a volume
 
 Detaches a volume from the specified device
 
@@ -190,7 +192,7 @@ Detaches a volume from the specified device
 response = @compute.detach_volume(@@attachment_id)
 ```
 
-###Delete a volume
+## Delete a volume
 Deletes a specified volume
 
 ```ruby
@@ -199,21 +201,21 @@ response = @compute.delete_volume(@@volume_id)
 
 ##Snapshot
 
-###Create a snapshot of a volume
+## Create a snapshot of a volume
 Creates a snapshot of the specified volume
 
 ```ruby
 response = @compute.create_snapshot(@@volume_id)
 ```
 
-###List snapshots
+## List snapshots
 List all snapshots of the specified volume
 
 ```ruby
 response = @compute.list_snapshots(@@volume_id)
 ```
 
-###Delete a snapshot
+## Delete a snapshot
 Deletes the specified snapshot
 ```ruby
 response = @compute.delete_snapshot(@@volume_id, @@snapshot_id)
@@ -221,7 +223,7 @@ response = @compute.delete_snapshot(@@volume_id, @@snapshot_id)
 
 ##IP addresses
 
-###Reserve an IP address
+## Reserve an IP address
 Reserve an IP address
 
 ```ruby
@@ -244,21 +246,21 @@ Available parameters
 | type | string |  | Yes |
 | comments | string |  | No |
 
-###Get IPs
+## Get IPs
 Retrives the list of IP addresses under the specified project
 
 ```ruby
 response = @compute.list_ips(@project_id)
 ```
 
-###Assign an IP address
+## Assign an IP address
 Assigns an IP address to the specified devices
 
 ```ruby
 response = @compute.assign_ip(@@device_id, options)
 ```
 
-###Unassign IP address
+## Unassign IP address
 Unassigns the specified IP address
  
 ```ruby
@@ -267,7 +269,7 @@ Unassigns the specified IP address
 
 ##Projects
 
-###Create a project
+## Create a project
 
 Creates a new project
 
@@ -287,7 +289,7 @@ Available parameters
 | payment_method_id | string |  | No |
 
 
-###Retrieve a project
+## Retrieve a project
 
 Gets project details
 
@@ -298,7 +300,7 @@ response = @compute.get_project(@@project_id)
 
 ##Plans
 
-###List plans
+## List plans
 List all available plans of the account
 
 ```ruby
@@ -307,7 +309,7 @@ response = @compute.list_plans()
 
 ##Facilities
 
-###List facilities
+## List facilities
 List all available facilities of the account
 
 ```ruby
