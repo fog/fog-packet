@@ -1,19 +1,20 @@
-require_relative 'plan'
+require_relative "device"
 
 module Fog
   module Compute
     class Packet
-      class Facilities < Fog::Collection
-        model Fog::Compute::Packet::Plans
+      # Devices Collection
+      class Devices < Fog::Collection
+        model Fog::Compute::Packet::Device
 
         def all(project_id)
-          response = service.list_project_devices(project_id)
-          load(response.body)
+          response = service.list_devices(project_id)
+          load(response.body["devices"])
         end
 
-        def all(project_id, device_id)
-          response = service.get_device(project_id, device_id)
-          load(response.body)
+        def get(id)
+          response = service.get_device(id)
+          new(response.body)
         end
       end
     end

@@ -1,6 +1,7 @@
 module Fog
   module Compute
     class Packet
+      # Device Model
       class Device < Fog::Model
         identity :id
 
@@ -44,7 +45,7 @@ module Fog
         end
 
         def save
-          requires :facility, :plan, :hostname, :operating_system
+          requires :project_id, :facility, :plan, :hostname, :operating_system
 
           options = {}
           options[:description] = description if description
@@ -62,7 +63,7 @@ module Fog
           options[:user_ssh_keys] = user_ssh_keys if user_ssh_keys
           options[:features] = features if features
 
-          data = service.create_device(options)
+          service.create_device(project_id, options)
           true
         end
 
@@ -105,7 +106,7 @@ module Fog
         def destroy
           requires :id
 
-          data = service.delete_device(id)
+          service.delete_device(id)
           true
         end
 

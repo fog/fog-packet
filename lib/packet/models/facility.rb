@@ -1,8 +1,10 @@
 module Fog
   module Compute
     class Packet
+      # Facility Model
       class Facility < Fog::Model
         identity :id
+
         attribute :name
         attribute :code
         attribute :features

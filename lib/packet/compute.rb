@@ -36,8 +36,10 @@ module Fog
       request :create_project
       request :delete_project
       request :list_facilities
+      request :list_operating_systems
 
       request :create_device
+      request :list_devices
       request :get_device
       request :delete_device
       request :update_device

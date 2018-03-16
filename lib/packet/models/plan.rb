@@ -3,6 +3,7 @@ module Fog
     class Packet
       class Plan < Fog::Model
         identity :id
+
         attribute :slug
         attribute :name
         attribute :description

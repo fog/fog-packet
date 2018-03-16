@@ -1,8 +1,10 @@
 module Fog
   module Compute
     class Packet
+      # Ip Model
       class Ip < Fog::Model
         identity :id
+
         attribute :address
         attribute :gateway
         attribute :network
@@ -39,12 +41,12 @@ module Fog
           options[:address] = address
           options[:manageable] = manageable
 
-          data = service.assign_ip(options)
+          service.assign_ip(options)
           true
         end
 
         def unassign(ip_id)
-          data = service.unassign_ip(ip_id)
+          service.unassign_ip(ip_id)
           true
         end
       end

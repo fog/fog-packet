@@ -1,10 +1,11 @@
-require_relative 'plan'
+require_relative 'volume'
 
 module Fog
   module Compute
     class Packet
+      # Volumes Collection
       class Volumes < Fog::Collection
-        model Fog::Compute::Packet::Plans
+        model Fog::Compute::Packet::Volumes
 
         def all(project_id)
           response = service.list_volumes(project_id)

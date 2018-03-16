@@ -3,8 +3,9 @@ require_relative 'plan'
 module Fog
   module Compute
     class Packet
+      # Ips Collection
       class Ips < Fog::Collection
-        model Fog::Compute::Packet::Plans
+        model Fog::Compute::Packet::Ips
 
         def all
           response = service.list_ips(project_id)

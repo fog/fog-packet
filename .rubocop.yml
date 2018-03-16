@@ -4,9 +4,6 @@ Metrics/LineLength:
 Style/EachWithObject:
   Enabled: false
 
-Style/Encoding:
-  EnforcedStyle: when_needed
-
 Style/FormatString:
   Enabled: false
 
@@ -17,8 +14,7 @@ Style/SignalException:
   EnforcedStyle: only_raise
 
 Style/StringLiterals:
-  Enabled: false
-  # EnforcedStyle: double_quotes
+  EnforcedStyle: double_quotes
 
-Style/IndentationWidth:
+Layout/IndentationWidth:
   Width: 2

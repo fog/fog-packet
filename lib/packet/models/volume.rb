@@ -1,8 +1,10 @@
 module Fog
   module Compute
     class Packet
+      # Volume Model
       class Volume < Fog::Model
         identity :id
+
         attribute :name
         attribute :description
         attribute :size
@@ -37,25 +39,28 @@ module Fog
           options[:billing_cycle] = billing_cycle if billing_cycle
           options[:snapshot_policies] = snapshot_policies if snapshot_policies
 
-          date = service.create_volume(options)
+          service.create_volume(options)
           true
         end
 
         def attach(device_id)
           requires :id
 
-          data = service.attach_volume(id, device_id)
+          service.attach_volume(id, device_id)
+          true
         end
 
         def detach
           requires :id
 
-          data = service.detach_volume(id)
+          service.detach_volume(id)
+          true
         end
 
         def destroy
           requires :id
-          data = service.delete_volume(id)
+
+          service.delete_volume(id)
           true
         end
 

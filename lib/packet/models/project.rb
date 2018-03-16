@@ -1,8 +1,10 @@
 module Fog
   module Compute
     class Packet
+      # Project Model
       class Project < Fog::Model
         identity :id
+
         attribute :name
         attribute :created_at
         attribute :updated_at
@@ -30,7 +32,7 @@ module Fog
           options[:name] = name
           options[:payment_method_id] = payment_method_id if payment_method_id
 
-          data = service.create_project(options)
+          service.create_project(options)
           true
         end
       end
