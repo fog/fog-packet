@@ -42,20 +42,20 @@ class TestSnapshots < Minitest::Test
 
   def test_b_list_snapshots
     sleep(10)
-    response = @compute.list_snapshots(@volume_id)
+    response = @compute.list_snapshots(@@volume_id)
 
     assert_equal 200, response.status
     assert !response.body["snapshots"].empty?
-    @snapshot_id = response.body["snapshots"][0]["id"]
+    @@snapshot_id = response.body["snapshots"][0]["id"]
   end
 
   def test_c_delete_snapshot
-    response = @compute.delete_snapshot(@volume_id, @snapshot_id)
+    response = @compute.delete_snapshot(@@volume_id, @@snapshot_id)
 
     assert_equal 204, response.status
   end
 
   def test_e_cleanup
-    @compute.delete_volume(@volume_id)
+    @compute.delete_volume(@@volume_id)
   end
 end

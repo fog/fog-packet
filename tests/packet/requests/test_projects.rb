@@ -29,15 +29,14 @@ class TestProjects < Minitest::Test
     # Perform Request
     response = @compute.create_project(options)
 
-    @project_id = response.body["id"]
+    @@project_id = response.body["id"]
     # Assertions
     assert_equal response.status, 201
   end
 
   def test_get_project
-    response = @compute.get_project(@project_id)
+    response = @compute.get_project(@@project_id)
 
     assert_equal response.status, 200
-    assert_nil response.body["id"]
   end
 end

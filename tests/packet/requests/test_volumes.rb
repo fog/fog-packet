@@ -46,11 +46,11 @@ class TestVolumes < Minitest::Test
     response = @compute.create_volume(@project_id, options)
 
     assert_equal response.status, 201
-    @volume_id = response.body["id"]
+    @@volume_id = response.body["id"]
 
     unless Fog.mock!
       loop do
-        response = @compute.get_volume(@volume_id)
+        response = @compute.get_volume(@@volume_id)
         break if response.body["state"] == "active"
         sleep(3)
       end
@@ -58,20 +58,18 @@ class TestVolumes < Minitest::Test
   end
 
   def test_b_get_volume
-    response = @compute.get_volume(@volume_id)
+    response = @compute.get_volume(@@volume_id)
 
     assert_equal response.status, 200
-    assert_nil response.body["id"]
   end
 
   def test_c_update_volume
     options = {
       :size => 30
     }
-    response = @compute.update_volume(@volume_id, options)
+    response = @compute.update_volume(@@volume_id, options)
 
     assert_equal response.status, 200
-    assert_nil response.body["id"]
     assert_equal response.body["size"], options[:size]
   end
 
@@ -82,19 +80,19 @@ class TestVolumes < Minitest::Test
   end
 
   def test_e_attach_volume
-    response = @compute.attach_volume(@volume_id, @device_id)
-    @attachment_id = response.body["id"]
+    response = @compute.attach_volume(@@volume_id, @device_id)
+    @@attachment_id = response.body["id"]
 
     assert_equal 201, response.status
   end
 
   def test_f_detach_volume
-    response = @compute.detach_volume(@attachment_id)
+    response = @compute.detach_volume(@@attachment_id)
     assert_equal 204, response.status
   end
 
   def test_g_delete_volume
-    response = @compute.delete_volume(@volume_id)
+    response = @compute.delete_volume(@@volume_id)
     assert_equal response.status, 204
   end
 
