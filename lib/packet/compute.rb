@@ -13,9 +13,6 @@ module Fog
       # Models
       model_path "packet/models"
 
-      # model :project
-      # collection :projects
-
       model :plan
       collection :plans
 
@@ -45,6 +42,21 @@ module Fog
 
       model :virtual_network
       collection :virtual_networks
+
+      model :ssh_key
+      collection :ssh_keys
+
+      model :email
+      collection :emails
+
+      model :user
+      collection :users
+
+      model :vpn
+      collection :vpns
+
+      model :spot_market_price
+      collection :spot_market_prices
 
       # Requests
       request_path "packet/requests"
@@ -90,6 +102,28 @@ module Fog
       request :unassign_port
       request :disbond_ports
       request :bond_ports
+
+      request :list_ssh_keys
+      request :create_ssh_key
+      request :get_ssh_key
+      request :delete_ssh_key
+      request :update_ssh_key
+
+      request :create_email
+      request :get_email
+      request :update_email
+      request :delete_email
+
+      request :list_users
+      request :get_user
+      request :update_user
+
+      request :enable_vpn
+      request :disable_vpn
+      request :get_vpn
+
+      request :list_spotmarketprices
+      request :list_spotmarketprices_history
 
       # Real
       class Real

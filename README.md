@@ -287,4 +287,214 @@ List all available facilities of the account
 ```ruby
 response = compute.facilities.all
 ```
- 
+
+## Users
+
+## List Users
+List all users in the current user’s projects
+
+```ruby
+response = compute.users.all
+```
+
+## Retrieve a user
+
+Retrieve the currently logged-in user or retrieve a user by user ID.
+
+```ruby
+response = @compute.users.get
+```
+            
+```ruby
+response = @compute.users.get(user_id)
+```
+
+## Update a user
+
+Updates user information.
+
+```ruby
+user.first_name = "Jane"
+user.last_name = "Doe"
+
+response = user.update
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| first_name | string | First name| |
+| last_name | string | Last name |  |
+| phone_number | string |  Phone number|  |
+| time_zone | string | Time zone of the user|  |
+| password | string |  |  |
+| avatar | string |  |  |
+
+## Emails
+
+## Create an email
+
+Add a new email address to the current user.
+
+```ruby
+email = compute.emails.create(:address => "jdoe@example.net", :default => false)
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| address | string | Email address | |
+| default | boolean | Indicates if email address is default or not |  |
+
+## Retrieve an email
+Provides one of the user’s emails.
+
+```ruby
+response = compute.emails.get(email_id)
+```
+
+## Update an email
+
+Updates the email.
+
+```ruby
+email.default = false
+email.update
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| address | string | Email address | |
+| default | boolean | Indicates if email address is default or not |  |
+
+## Delete an email
+
+Deletes the email.
+
+```ruby
+response = email.destroy
+```
+
+Note: Default email cannot be deleted.
+
+## VPN
+
+## Enable VPN
+Turns on vpn for the currently logged-in user.
+
+```ruby
+response = compute.vpns.enable
+```
+
+## Disable VPN
+Turns off vpn for the currently logged-in user.
+
+```ruby
+response = compute.vpns.disable
+```
+## Retrieve VPN
+Returns the client vpn config for the currently logged-in user.
+
+```ruby
+response = compute.vpns.get("nrt1")
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| facility_code | string | facility code (ewr1, scj1, arm1, nrt1) | Yes |
+
+
+## Spot Market Prices
+
+## Get spot market prices
+
+Get Packet current spot market prices.
+
+```ruby
+response = compute.spot_market_prices.all
+```
+
+## Spot Market History
+
+Get spot market prices for a given plan and facility in a fixed period of time.
+
+```ruby
+response = compute.spot_market_prices.get("ewr1", "baremetal_0")
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| facility_code | string | facility code (ewr1, scj1, arm1, nrt1) | Yes |
+| plan | string | plan code | Yes |
+
+## SSH Keys
+
+## Create a SSH Key
+
+Creates a SSH Key
+
+```ruby
+response = compute.ssh_keys.create(:label => "test", :key => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDgnV5MOhBqpQLt66KGlMKi...")
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| label | string | Label for the SSH key | Yes |
+| key | string | Public SSH Key | Yes |
+
+## List SSH Keys
+
+Returns a collection of the user’s ssh keys, unless project ID is specified then it returns a collection of the project's ssh keys.
+
+```ruby
+response = compute.ssh_keys.all
+```
+
+```ruby
+response = compute.ssh_keys.all(project_id)
+```
+
+## Retrieve a SSH key
+
+Returns a single ssh key
+
+```ruby
+response = compute.ssh_keys.get(key_id)
+```
+
+## Update a SSH Key
+
+```ruby
+sshkey.label = "test_jg_01"
+sshkey.key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDgnV5MOhBqpQLt66KGlMKi..."
+
+response = sshkey.update
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| label | string | Label for the SSH key | Yes |
+| key | string | Public SSH Key | Yes |
+
+## Delete a SSH Key
+
+Deletes the ssh key.
+
+```ruby
+response = sshkey.destroy
+```    
+                                                                 
+
+
