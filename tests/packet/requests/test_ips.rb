@@ -40,8 +40,8 @@ class TestDevices < Minitest::Test
     }
 
     response = @compute.reserve_ip(@project_id, options)
-    @address = response.body["address"]
-    @ip_id = response.body["id"]
+    @@address = response.body["address"]
+    @@ip_id = response.body["id"]
 
     assert_equal 201, response.status
   end
@@ -54,7 +54,7 @@ class TestDevices < Minitest::Test
 
   def test_c_assign_ip
     options = {
-      :address => @address
+      :address => @@address
     }
 
     response = @compute.assign_ip(@device_id, options)
@@ -63,7 +63,7 @@ class TestDevices < Minitest::Test
   end
 
   def test_d_unassign_ip
-    response = @compute.unassign_ip(@ip_id)
+    response = @compute.unassign_ip(@@ip_id)
 
     assert_equal 204, response.status
   end

@@ -10,10 +10,12 @@ require "fog/json"
 require_relative "packet/compute"
 
 module Fog
+  # Compute
   module Compute
     autoload :Packet, File.expand_path('../packet/compute', __FILE__)
   end
 
+  # Models
   module Models
   end
 

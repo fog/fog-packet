@@ -44,7 +44,7 @@ class TestVirtualNetworks < Minitest::Test
     assert_equal 201, response.status
     assert_equal options[:description], response.body["description"]
 
-    @virtual_network_id = response.body["id"]
+    @@virtual_network_id = response.body["id"]
   end
 
   def test_b_list_virtual_networks
@@ -55,12 +55,12 @@ class TestVirtualNetworks < Minitest::Test
   end
 
   def test_d_bond_ports
-    response = @compute.bond_ports(@virtual_network_id, true)
+    response = @compute.bond_ports(@@virtual_network_id, true)
     assert_equal 200, response.status
   end
 
   def test_e_disbond_ports
-    response = @compute.disbond_ports(@virtual_network_id, true)
+    response = @compute.disbond_ports(@@virtual_network_id, true)
     assert_equal 200, response.status
   end
 
@@ -72,7 +72,7 @@ class TestVirtualNetworks < Minitest::Test
         eth1 = np["id"] if np["name"] == "eth1"
       end
     end
-    response = @compute.assign_port(eth1, @virtual_network_id)
+    response = @compute.assign_port(eth1, @@virtual_network_id)
 
     assert_equal 200, response.status
   end
@@ -86,13 +86,13 @@ class TestVirtualNetworks < Minitest::Test
         eth1 = np["id"] if np["name"] == "eth1"
       end
     end
-    response = @compute.unassign_port(eth1, @virtual_network_id)
+    response = @compute.unassign_port(eth1, @@virtual_network_id)
 
     assert_equal 200, response.status
   end
 
   def test_h_delete_virtual_network
-    response = @compute.delete_virtual_network(@virtual_network_id)
+    response = @compute.delete_virtual_network(@@virtual_network_id)
 
     assert_equal 204, response.status
   end

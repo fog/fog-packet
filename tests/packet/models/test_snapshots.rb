@@ -29,7 +29,7 @@ class TestSnapshots < Minitest::Test
 
   def test_a_create_snapshot
     @compute.snapshots.create(:storage_id => @@volume_id)
-      # assert_equal true, response
+    assert_equal true, response
   end
 
   def test_b_list_snapshots
