@@ -1,4 +1,4 @@
-require_relative "plan"
+require_relative "virtual_network"
 
 module Fog
   module Compute

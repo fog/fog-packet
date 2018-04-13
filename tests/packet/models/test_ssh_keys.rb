@@ -1,7 +1,7 @@
 require_relative "../../../lib/fog-packet"
 require "minitest/autorun"
 
-# Fog.mock!
+Fog.mock!
 
 # TestFacilities
 class TestSSHKeys < Minitest::Test

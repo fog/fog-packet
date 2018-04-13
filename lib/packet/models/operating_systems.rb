@@ -1,4 +1,4 @@
-require_relative "plan"
+require_relative "operating_system"
 
 module Fog
   module Compute

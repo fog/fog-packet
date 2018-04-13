@@ -23,7 +23,7 @@ class TestSpotMarketPrices < Minitest::Test
 
   def test_list_spotmarketprices_history
     # Perform Request
-    response = @compute.list_spotmarketprices_history(facility = "ewr1", plan = "baremetal_0")
+    response = @compute.list_spotmarketprices_history("ewr1", "baremetal_0")
 
     # Assertions
     assert !response.body["prices_history"].empty?

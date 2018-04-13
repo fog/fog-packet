@@ -29,12 +29,10 @@ class TestVolumes < Minitest::Test
     assert @@volume
     @@volume_id = @@volume.id
 
-    unless Fog.mock!
-      loop do
-        response = volume.reload
-        break if response.state == "active"
-        sleep(3)
-      end
+    loop do
+      response = volume.reload
+      break if response.state == "active"
+      sleep(3)
     end
   end
 

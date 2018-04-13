@@ -7,7 +7,6 @@ module Fog
       class Vpns < Fog::Collection
         model Fog::Compute::Packet::Vpn
 
-
         def get(facility_code)
           response = service.get_vpn(facility_code)
           new(response.body)
