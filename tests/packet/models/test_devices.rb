@@ -56,12 +56,10 @@ class TestDevices < Minitest::Test
 
     assert_equal true, response
 
-    unless Fog.mock!
-      loop do
-        d = device.reload
-        break if d.state == "active"
-        sleep(3)
-      end
+    loop do
+      d = device.reload
+      break if d.state == "active"
+      sleep(3)
     end
   end
 
@@ -71,12 +69,10 @@ class TestDevices < Minitest::Test
     response = device.stop
     assert_equal true, response
 
-    unless Fog.mock!
-      loop do
-        d = device.reload
-        break if d.state == "inactive"
-        sleep(3)
-      end
+    loop do
+      d = device.reload
+      break if d.state == "inactive"
+      sleep(3)
     end
   end
 
@@ -87,16 +83,26 @@ class TestDevices < Minitest::Test
 
     assert_equal true, response
 
-    unless Fog.mock!
-      loop do
-        d = device.reload
-        break if d.state == "active"
-        sleep(3)
-      end
+    loop do
+      d = device.reload
+      break if d.state == "active"
+      sleep(3)
     end
   end
 
-  def test_h_delete_device
+  def test_h_get_events
+    events = @compute.events.all(@@device_id)
+
+    assert !events.empty?
+  end
+
+  def test_i_get_bandwidth
+    response = @compute.bandwidth.get(@@device_id)
+
+    assert_equal 200, response.status
+  end
+
+  def test_z_delete_device
     device = @compute.devices.get(@@device_id)
     result = device.destroy
     assert_equal true, result

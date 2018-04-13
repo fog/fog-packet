@@ -61,12 +61,10 @@ class TestDevices < Minitest::Test
 
     assert_equal 202, response.status
 
-    unless Fog.mock!
-      loop do
-        response = @compute.get_device(@@device_id)
-        break if response.body["state"] == "active"
-        sleep(3)
-      end
+    loop do
+      response = @compute.get_device(@@device_id)
+      break if response.body["state"] == "active"
+      sleep(3)
     end
   end
 
@@ -75,12 +73,10 @@ class TestDevices < Minitest::Test
 
     assert_equal 202, response.status
 
-    unless Fog.mock!
-      loop do
-        response = @compute.get_device(@@device_id)
-        break if response.body["state"] == "inactive"
-        sleep(3)
-      end
+    loop do
+      response = @compute.get_device(@@device_id)
+      break if response.body["state"] == "inactive"
+      sleep(3)
     end
   end
 
@@ -89,16 +85,27 @@ class TestDevices < Minitest::Test
 
     assert_equal 202, response.status
 
-    unless Fog.mock!
-      loop do
-        response = @compute.get_device(@@device_id)
-        break if response.body["state"] == "active"
-        sleep(3)
-      end
+    loop do
+      response = @compute.get_device(@@device_id)
+      break if response.body["state"] == "active"
+      sleep(3)
     end
   end
 
-  def test_h_delete_device
+  def test_h_get_events
+    response = @compute.list_events(@@device_id)
+
+    assert_equal 200, response.status
+    assert !response.body["events"].empty?
+  end
+
+  def test_i_get_bandwidth
+    response = @compute.get_bandwidth(@@device_id)
+
+    assert_equal 200, response.status
+  end
+
+  def test_z_delete_device
     response = @compute.delete_device(@@device_id)
 
     assert_equal 204, response.status

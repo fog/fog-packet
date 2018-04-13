@@ -122,6 +122,20 @@ Deletes the specified devices
 ```ruby
 response = device.destroy
 ```
+
+## Get Device Events
+Returns a list of events pertaining to a specific device.
+
+```ruby
+events = compute.events.all(device_id)
+```
+## Get Device Bandwidth
+Retrieve an instance bandwidth for a given period of time.
+
+```ruby
+bandwidth = compute.bandwidth.get(device_id, "2018-03-10", "2018-04-10")
+```
+
 ## Volumes
 
 ## Create a volume
@@ -302,11 +316,11 @@ response = compute.users.all
 Retrieve the currently logged-in user or retrieve a user by user ID.
 
 ```ruby
-response = @compute.users.get
+response = compute.users.get
 ```
             
 ```ruby
-response = @compute.users.get(user_id)
+response = compute.users.get(user_id)
 ```
 
 ## Update a user
@@ -495,6 +509,231 @@ Deletes the ssh key.
 ```ruby
 response = sshkey.destroy
 ```    
-                                                                 
 
+## Batches
 
+## Create a batch
+Creates a new batch of instances.
+
+```ruby
+batches = [{
+    :hostname => "test1",
+    :description => "test batch",
+    :plan => "baremetal_0",
+    :operating_system => "coreos_stable",
+    :facility => "ewr1",
+    :billing_cycle => "hourly",
+    :tags => ["abc"],
+    :quantity => 1
+}]
+
+response = compute.batches.create(project_id, :batches => batches)
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| batches | collection | Collection of instances. | Yes |
+| project_id | string | UUID of the project | Yes |
+
+## List batches
+Returns all batches for the given project.
+
+```ruby
+response = compute.batches.all(project_id)
+```
+
+## Retrieve a batch
+Returns a batch
+
+```ruby
+response = compute.batches.get(batch_id)
+```
+
+## BGP Sessions
+
+## Create a BGP Session
+Creates a BGP session.
+
+```ruby
+response = compute.bgp_sessions.create(:device_id => device_id, :address_family => address_family)
+```
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| device_id | string | UUID of a device | Yes |
+| address_family | string | Either 'ipv4' or 'ipv6' | Yes |
+
+## List BGP sessions
+Provides a listing of available BGP sessions for the device.
+
+```ruby
+response = compute.bgp_sessions.all(device_id)
+```
+
+## Retrieve a BGP session
+Returns a BGP session.
+
+```ruby
+response = compute.bgp_sessions.get(session_id)
+```
+
+## Delete a BGP session
+Deletes the BGP session
+
+```ruby
+response = session.destroy
+```
+
+## Two Factor Authentication
+
+## Enable two factor authentication
+Enables two factor authentication using authenticator app.
+
+```ruby
+compute.two_factor_auth.enable(type)
+```
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| type | string | Two factor auth types include authenticator app or sms.  | Yes |
+
+## Disable two factor authentication
+Disables two factor authentication.
+
+```ruby
+compute.two_factor_auth.disable(type)
+```
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| type | string | Two factor auth types include authenticator app or sms.  | Yes |
+
+## Sessions
+
+## Session Login
+Log in
+
+```ruby
+compute.sessions.login(:username => "username",:password => "password")
+```
+
+## List Sessions
+Returns all session tokens for the current user.
+
+```ruby
+sessions = compute.sessions.all
+```
+
+## Delete session
+Destroy users current session unless sessions_id is provided.
+
+```ruby
+compute.sessions.destroy(sessions_id)
+```
+
+## Notifications
+
+## List notifications
+Returns a collection of the current user’s notification.
+
+```ruby
+compute.notifications.all
+```
+
+## Retrieve a notification
+Returns a single notification if the user has access.
+
+```ruby
+compute.notifications.get(notification_id)
+```
+
+## Update a notification
+Updates a single notification. Currently, the only supported operation is marking a notification as read.
+
+```ruby
+notification.update
+```
+
+## Invitations
+
+## List Invitations
+Returns all invitations in a project.
+
+```ruby
+compute.invitations.all(project_id)
+```
+
+## Retrieve an invite
+Returns a single invitation.
+
+```ruby
+invite = compute.invitations.get(invite_id)
+```
+
+## Accept invitation
+Accept an invitation.
+
+```ruby
+invite.accept
+```
+
+## Decline invitation
+Decline an invitation.
+
+```ruby
+invite.decline
+```
+
+## UserVerificationTokens
+
+## Request email verification 
+Creates an email verification request.
+
+```ruby
+compute.email_verification.request(email)
+```
+
+## Verify email
+Consumes an email verification token and verifies the user associated with it.
+
+```ruby
+compute.email_verification.verify(token)
+```
+
+## Licenses
+
+## Create a License
+Creates a new license for the given project.
+
+```ruby
+license = {
+  :project_id => project_id, 
+  :description => "test01", 
+  :size => 1,
+  :license_product_id => "blah"
+}
+
+license = compute.licenses.create(license)
+```
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| project_id | string | UUID of the project | Yes |
+| description | string | | Yes |
+| size | string | | Yes |
+| license_product_id | string | | Yes |
+
+## List Project Licenses
+Provides a collection of licenses for a given project.
+
+```ruby
+compute.licenses.all(project_id)
+```
+
+## Retrieve a License
+Returns a license.
+
+```ruby
+license = compute.licenses.get(license_id)
+```

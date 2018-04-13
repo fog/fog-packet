@@ -23,7 +23,7 @@ module Fog
 
       # Mock
       class Mock
-        def update_user(user_id, options)
+        def update_user(_user_id, _options)
           response = Excon::Response.new
           response.status = 200
           response.body = {
