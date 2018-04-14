@@ -18,12 +18,10 @@ class TestSnapshots < Minitest::Test
 
     @@volume_id = volume.id
     p @@volume_id
-    unless Fog.mock!
-      loop do
-        sleep(3)
-        response = volume.reload
-        break if response.state == "active"
-      end
+    loop do
+      sleep(3)
+      response = volume.reload
+      break if response.state == "active"
     end
   end
 

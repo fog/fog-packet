@@ -25,12 +25,10 @@ class TestVolumes < Minitest::Test
 
     @device_id = response.body["id"]
 
-    unless Fog.mock!
-      loop do
-        response = @compute.get_device(@device_id)
-        break if response.body["state"] == "active"
-        sleep(3)
-      end
+    loop do
+      response = @compute.get_device(@device_id)
+      break if response.body["state"] == "active"
+      sleep(3)
     end
   end
 
@@ -48,12 +46,10 @@ class TestVolumes < Minitest::Test
     assert_equal response.status, 201
     @@volume_id = response.body["id"]
 
-    unless Fog.mock!
-      loop do
-        response = @compute.get_volume(@@volume_id)
-        break if response.body["state"] == "active"
-        sleep(3)
-      end
+    loop do
+      response = @compute.get_volume(@@volume_id)
+      break if response.body["state"] == "active"
+      sleep(3)
     end
   end
 

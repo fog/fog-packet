@@ -25,12 +25,10 @@ class TestSnapshots < Minitest::Test
 
     @@volume_id = response.body["id"]
 
-    unless Fog.mock!
-      loop do
-        sleep(3)
-        response = @compute.get_volume(@volume_id)
-        break if response.body["state"] == "active"
-      end
+    loop do
+      sleep(3)
+      response = @compute.get_volume(@volume_id)
+      break if response.body["state"] == "active"
     end
   end
 

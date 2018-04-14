@@ -58,6 +58,32 @@ module Fog
       model :spot_market_price
       collection :spot_market_prices
 
+      model :batch
+      collection :batches
+
+      model :bgp_session
+      collection :bgp_sessions
+
+      model :event
+      collection :events
+
+      collection :two_factor_auth
+
+      model :session
+      collection :sessions
+
+      model :notification
+      collection :notifications
+
+      model :invitation
+      collection :invitations
+
+      collection :email_verification
+      collection :bandwidth
+
+      model :license
+      collection :licenses
+
       # Requests
       request_path "packet/requests"
 
@@ -124,6 +150,44 @@ module Fog
 
       request :list_spotmarketprices
       request :list_spotmarketprices_history
+
+      request :list_batches
+      request :get_batch
+      request :create_batch
+
+      request :create_bgp_session
+      request :delete_bgp_session
+      request :get_bgp_session
+      request :list_bgp_sessions
+
+      request :list_events
+
+      request :enable_two_factor_auth
+      request :disable_two_factor_auth
+
+      request :list_sessions
+      request :delete_session
+      request :session_login
+
+      request :list_notifications
+      request :get_notification
+      request :update_notification
+
+      request :list_invitations
+      request :get_invitation
+      request :accept_invitation
+      request :decline_invitation
+
+      request :request_email_verification
+      request :verify_email
+
+      request :get_bandwidth
+
+      request :list_licenses
+      request :create_license
+      request :get_license
+      request :update_license
+      request :delete_license
 
       # Real
       class Real
