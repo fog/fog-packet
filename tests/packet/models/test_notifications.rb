@@ -1,13 +1,7 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
 # TestProjects
 class TestProjects < Minitest::Test
-  def self.test_order
-    :alpha
-  end
-
   def setup
     # Establish Connection
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])

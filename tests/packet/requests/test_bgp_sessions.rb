@@ -1,7 +1,5 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
 # TestBGPSessions
 class TestBGPSessions < Minitest::Test
   def self.test_order
@@ -31,7 +29,7 @@ class TestBGPSessions < Minitest::Test
     @device_id = response.body["id"]
   end
 
-  def test_a_create_bgp_session
+  def test_request_a_create_bgp_session
     # Perform Request
     address_family = "ipv4"
     response = @compute.create_bgp_session(@device_id, address_family)
@@ -43,25 +41,25 @@ class TestBGPSessions < Minitest::Test
     @@session_id = response.body["id"]
   end
 
-  def test_b_get_bgp_session
+  def test_request_b_get_bgp_session
     response = @compute.get_bgp_session(@@session_id)
 
     assert_equal @@session_id, response.body["id"]
   end
 
-  def test_d_get_bgp_sessions
+  def test_request_d_get_bgp_sessions
     response = @compute.list_bgp_sessions(@device_id)
 
     assert !response.body["bgp_sessions"].empty?
   end
 
-  def test_e_delete_bgp_session
+  def test_request_e_delete_bgp_session
     response = @compute.delete_bgp_session(@@session_id)
 
     assert_equal 204, response.status
   end
 
-  def test_z_cleanup
+  def test_request_z_cleanup
     @compute.delete_device(@device_id)
   end
 end

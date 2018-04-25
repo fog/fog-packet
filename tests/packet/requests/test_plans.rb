@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestPlans
 class TestPlans < Minitest::Test
@@ -14,7 +11,7 @@ class TestPlans < Minitest::Test
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
   end
 
-  def test_list_plans
+  def test_request_list_plans
     # Perform Request
     response = @compute.list_plans
 

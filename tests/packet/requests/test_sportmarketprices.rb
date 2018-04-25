@@ -1,8 +1,6 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
-# TestProjects
+# TestSpotMarketPrices
 class TestSpotMarketPrices < Minitest::Test
   def self.test_order
     :alpha
@@ -13,7 +11,7 @@ class TestSpotMarketPrices < Minitest::Test
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
   end
 
-  def test_list_spotmarketprices
+  def test_request_list_spotmarketprices
     # Perform Request
     response = @compute.list_spotmarketprices
 
@@ -21,7 +19,7 @@ class TestSpotMarketPrices < Minitest::Test
     assert !response.body["spot_market_prices"].empty?
   end
 
-  def test_list_spotmarketprices_history
+  def test_request_list_spotmarketprices_history
     # Perform Request
     response = @compute.list_spotmarketprices_history("ewr1", "baremetal_0")
 

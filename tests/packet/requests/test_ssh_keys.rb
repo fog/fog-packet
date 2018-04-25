@@ -1,9 +1,6 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
-
-# TestFacilities
+# TestSSHKeys
 class TestSSHKeys < Minitest::Test
   def self.test_order
     :alpha
@@ -14,10 +11,10 @@ class TestSSHKeys < Minitest::Test
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
   end
 
-  def test_a_create_ssh_key
+  def test_request_a_create_ssh_key
     options = {
       :label => "test",
-      :key => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDgnV5MOhBqpQLt66KGlMKi"
+      :key => "ssh-rsa AAAAB3Nz"
     }
 
     # Perform Request
@@ -29,19 +26,19 @@ class TestSSHKeys < Minitest::Test
     @@key_id = response.body["id"]
   end
 
-  def test_b_list_ssh_keys
+  def test_request_b_list_ssh_keys
     response = @compute.list_ssh_keys
 
     assert !response.body["ssh_keys"].empty?
   end
 
-  def test_c_get_ssh_key
+  def test_request_c_get_ssh_key
     response = @compute.get_ssh_key(@@key_id)
 
     assert_equal @@key_id, response.body["id"]
   end
 
-  def test_d_update_ssh_key
+  def test_request_d_update_ssh_key
     options = {
       :label => "test",
       :key => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDgnV5MOhBqpQLt66KGlMKi"
@@ -55,7 +52,7 @@ class TestSSHKeys < Minitest::Test
     assert_equal options[:key], response.body["key"]
   end
 
-  def test_h_delete_ssh_key
+  def test_request_h_delete_ssh_key
     response = @compute.delete_ssh_key(@@key_id)
 
     assert_equal 204, response.status

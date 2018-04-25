@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestVolumes
 class TestVolumes < Minitest::Test
@@ -12,28 +9,20 @@ class TestVolumes < Minitest::Test
   def setup
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
     @project_id = "93125c2a-8b78-4d4f-a3c4-7367d6b7cca8"
-
-    @@device = @compute.devices.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
-
-    loop do
-      response = @@device.reload
-      break if response.state == "active"
-      sleep(3)
-    end
-    @@device_id = @@device.id
   end
 
   def test_a_create_volume
+    device = @compute.devices.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
+
+    device.wait_for { ready? }
+    @@device_id = device.id
+
     @@volume = @compute.volumes.create(:project_id => @project_id, :facility => "ewr1", :plan => "storage_1", :size => 20, :description => "test description", :billing_cycle => "hourly")
 
     assert @@volume
     @@volume_id = @@volume.id
 
-    loop do
-      response = volume.reload
-      break if response.state == "active"
-      sleep(3)
-    end
+    @@volume.wait_for { ready? }
   end
 
   def test_b_get_volume
@@ -57,7 +46,7 @@ class TestVolumes < Minitest::Test
   end
 
   def test_e_attach_volume
-    response = @@volume.attach(@device_id)
+    response = @@volume.attach(@@device_id)
     @@attachment_id = response.id
 
     assert response
@@ -75,6 +64,7 @@ class TestVolumes < Minitest::Test
   end
 
   def test_h_cleanup
-    @@device.destroy
+    device = @compute.devices.get(@@device_id)
+    device.destroy
   end
 end

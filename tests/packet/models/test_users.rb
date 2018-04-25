@@ -1,7 +1,5 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
 # TestUsers
 class TestUsers < Minitest::Test
   def self.test_order
@@ -43,7 +41,7 @@ class TestUsers < Minitest::Test
 
     response = user.update
 
-    assert_equal "Test", response.first_name
-    assert_equal "Testing", response.last_name
+    assert_equal "Jane", response.first_name
+    assert_equal "Doe", response.last_name
   end
 end

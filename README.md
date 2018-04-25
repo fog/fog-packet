@@ -737,3 +737,47 @@ Returns a license.
 ```ruby
 license = compute.licenses.get(license_id)
 ```
+
+## Memberships
+
+## List Memberships
+Returns all memberships in a project.
+
+```ruby
+memberships = compute.memberships.all(project_id)
+```
+
+## Retrieve a membership
+Returns a single membership.
+
+```ruby
+membership = compute.memberships.get(membership_id)
+```
+
+## Update a membership
+Updates the membership.
+
+```ruby
+membership.roles = ["owner"]
+membership.update
+```
+## Delete a membership
+Deletes the membership.
+
+```ruby
+membership.destroy
+```
+
+## Unit tests
+
+Run mock tests:
+
+```bash
+FOG_MOCK=true rake test
+```
+
+Run real tests:
+
+```bash
+FOG_MOCK=false rake test
+```

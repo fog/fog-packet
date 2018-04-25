@@ -84,6 +84,9 @@ module Fog
       model :license
       collection :licenses
 
+      model :membership
+      collection :memberships
+
       # Requests
       request_path "packet/requests"
 
@@ -189,6 +192,11 @@ module Fog
       request :update_license
       request :delete_license
 
+      request :list_memberships
+      request :get_membership
+      request :update_membership
+      request :delete_membership
+
       # Real
       class Real
         def initialize(options = {})
@@ -230,9 +238,9 @@ module Fog
             raise "Internal Server Error. Please try again."
           end
           # Raise exception if a bad status code is returned
-          # unless SUCCESS_CODES.include? response.status
-          #   raise response.status
-          # end
+          unless SUCCESS_CODES.include? response.status
+            raise response.status.to_s + " " + response.body.to_s
+          end
 
           response
         end

@@ -1,8 +1,6 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
-# TestProjects
+# TestBGPSessions
 class TestBGPSessions < Minitest::Test
   def self.test_order
     :alpha
@@ -15,11 +13,7 @@ class TestBGPSessions < Minitest::Test
     device = @compute.devices.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
     @device_id = device.id
 
-    loop do
-      response = device.reload
-      break if response.state == "active"
-      sleep(3)
-    end
+    device.wait_for { ready? }
   end
 
   def test_a_create_bgp_session

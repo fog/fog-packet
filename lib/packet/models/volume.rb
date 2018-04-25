@@ -84,8 +84,12 @@ module Fog
 
           data = service.get_volume(id)
 
-          return unless data
-          self
+          return unless data.body
+          merge_attributes(data.body)
+        end
+
+        def ready?
+          state == "active"
         end
       end
     end

@@ -7,7 +7,6 @@ module Fog
           url = "/devices/" + device_id + "/bandwidth"
           url += "/?from=" + from + "&until=" + to if from != "" && to != ""
 
-          p url
           request(
             :expects => [201],
             :method => "GET",

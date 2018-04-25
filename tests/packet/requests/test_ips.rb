@@ -1,10 +1,7 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
-
-# TestDevices
-class TestDevices < Minitest::Test
+# TestIps
+class TestIps < Minitest::Test
   def self.test_order
     :alpha
   end
@@ -31,7 +28,7 @@ class TestDevices < Minitest::Test
     @device_id = response.body["id"]
   end
 
-  def test_a_reserve_ip
+  def test_request_a_reserve_ip
     options = {
       :facility => "ewr1",
       :quantity => 2,
@@ -46,13 +43,13 @@ class TestDevices < Minitest::Test
     assert_equal 201, response.status
   end
 
-  def test_b_get_ips
+  def test_request_b_get_ips
     response = @compute.list_ips(@project_id)
     response.body["ip_addresses"].length
     assert !response.body["ip_addresses"].empty?
   end
 
-  def test_c_assign_ip
+  def test_request_c_assign_ip
     options = {
       :address => @@address
     }
@@ -62,7 +59,7 @@ class TestDevices < Minitest::Test
     assert_equal 201, response.status
   end
 
-  def test_d_unassign_ip
+  def test_request_d_unassign_ip
     response = @compute.unassign_ip(@@ip_id)
 
     assert_equal 204, response.status

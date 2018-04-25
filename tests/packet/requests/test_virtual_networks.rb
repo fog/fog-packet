@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestVirtualNetworks
 class TestVirtualNetworks < Minitest::Test
@@ -31,7 +28,7 @@ class TestVirtualNetworks < Minitest::Test
     end
   end
 
-  def test_a_create_virtual_network
+  def test_request_a_create_virtual_network
     options = {
       :project_id => @project_id,
       :description => "test",
@@ -47,24 +44,24 @@ class TestVirtualNetworks < Minitest::Test
     @@virtual_network_id = response.body["id"]
   end
 
-  def test_b_list_virtual_networks
+  def test_request_b_list_virtual_networks
     response = @compute.list_virtual_networks(@project_id)
 
     assert_equal 200, response.status
     assert !response.body["virtual_networks"].empty?
   end
 
-  def test_d_bond_ports
+  def test_request_d_bond_ports
     response = @compute.bond_ports(@@virtual_network_id, true)
     assert_equal 200, response.status
   end
 
-  def test_e_disbond_ports
+  def test_request_e_disbond_ports
     response = @compute.disbond_ports(@@virtual_network_id, true)
     assert_equal 200, response.status
   end
 
-  def test_f_assign_port
+  def test_request_f_assign_port
     eth1 = ""
     @device["provisioning_events"].each do |port|
       next unless port["network_ports"]
@@ -77,7 +74,7 @@ class TestVirtualNetworks < Minitest::Test
     assert_equal 200, response.status
   end
 
-  def test_g_unassign_port
+  def test_request_g_unassign_port
     eth1 = ""
 
     @device["provisioning_events"].each do |port|
@@ -91,13 +88,13 @@ class TestVirtualNetworks < Minitest::Test
     assert_equal 200, response.status
   end
 
-  def test_h_delete_virtual_network
+  def test_request_h_delete_virtual_network
     response = @compute.delete_virtual_network(@@virtual_network_id)
 
     assert_equal 204, response.status
   end
 
-  def test_i_cleanup
+  def test_request_i_cleanup
     @compute.delete_device(@device["id"])
   end
 end

@@ -1,10 +1,7 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
-
-# TestDevices
-class TestDevices < Minitest::Test
+# TestLicenses
+class TestLicenses < Minitest::Test
   def self.test_order
     :alpha
   end
@@ -17,8 +14,8 @@ class TestDevices < Minitest::Test
 
   def test_a_create_license
     license = {
-      :project_id => @@project_id, 
-      :description => "test01", 
+      :project_id => @project_id,
+      :description => "test01",
       :size => "1",
       :license_product_id => "blah"
     }

@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestFacilities
 class TestFacilities < Minitest::Test
@@ -16,7 +13,6 @@ class TestFacilities < Minitest::Test
 
   def test_list_facilities
     facilities = @compute.facilities.all
-
     assert !facilities.empty?
   end
 end

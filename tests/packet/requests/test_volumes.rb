@@ -1,7 +1,4 @@
 require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
 
 # TestVolumes
 class TestVolumes < Minitest::Test
@@ -23,16 +20,16 @@ class TestVolumes < Minitest::Test
 
     response = @compute.create_device(@project_id, options)
 
-    @device_id = response.body["id"]
+    @@device_id = response.body["id"]
 
     loop do
-      response = @compute.get_device(@device_id)
+      response = @compute.get_device(@@device_id)
       break if response.body["state"] == "active"
       sleep(3)
     end
   end
 
-  def test_a_create_volume
+  def test_request_a_create_volume
     options = {
       :facility => "ewr1",
       :plan => "storage_1",
@@ -45,7 +42,7 @@ class TestVolumes < Minitest::Test
 
     assert_equal response.status, 201
     @@volume_id = response.body["id"]
-
+    
     loop do
       response = @compute.get_volume(@@volume_id)
       break if response.body["state"] == "active"
@@ -53,13 +50,13 @@ class TestVolumes < Minitest::Test
     end
   end
 
-  def test_b_get_volume
+  def test_request_b_get_volume
     response = @compute.get_volume(@@volume_id)
 
     assert_equal response.status, 200
   end
 
-  def test_c_update_volume
+  def test_request_c_update_volume
     options = {
       :size => 30
     }
@@ -69,30 +66,30 @@ class TestVolumes < Minitest::Test
     assert_equal response.body["size"], options[:size]
   end
 
-  def test_d_list_volumes
+  def test_request_d_list_volumes
     response = @compute.list_volumes(@project_id)
 
     assert !response.body["volumes"].empty?
   end
 
-  def test_e_attach_volume
-    response = @compute.attach_volume(@@volume_id, @device_id)
+  def test_request_e_attach_volume
+    response = @compute.attach_volume(@@volume_id, @@device_id)
     @@attachment_id = response.body["id"]
 
     assert_equal 201, response.status
   end
 
-  def test_f_detach_volume
+  def test_request_f_detach_volume
     response = @compute.detach_volume(@@attachment_id)
     assert_equal 204, response.status
   end
 
-  def test_g_delete_volume
+  def test_request_g_delete_volume
     response = @compute.delete_volume(@@volume_id)
     assert_equal response.status, 204
   end
 
-  def test_h_cleanup
-    @compute.delete_device(@device_id)
+  def test_request_h_cleanup
+    @compute.delete_device(@@device_id)
   end
 end

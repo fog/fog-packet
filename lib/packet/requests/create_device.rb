@@ -45,7 +45,7 @@ module Fog
             "short_id" => "8f65b7eb",
             "hostname" => "test01",
             "description" => nil,
-            "state" => "active",
+            "state" => "provisioning",
             "tags" => [],
             "image_url" => nil,
             "billing_cycle" => "hourly",

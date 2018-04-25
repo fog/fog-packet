@@ -100,8 +100,8 @@ module Fog
 
         def start
           requires :id
-          service.poweron_device(id)
-          true
+          response = service.poweron_device(id)
+          true if response.status == 202
         end
 
         def stop
@@ -119,10 +119,13 @@ module Fog
 
         def reload
           requires :id
-          data = service.get_device(id)
+          response = service.get_device(id)
+          return unless response.body
+          merge_attributes(response.body)
+        end
 
-          return unless data
-          self
+        def ready?
+          state == "active"
         end
       end
     end

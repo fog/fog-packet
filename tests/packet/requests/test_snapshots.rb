@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestSnapshots
 class TestSnapshots < Minitest::Test
@@ -25,21 +22,22 @@ class TestSnapshots < Minitest::Test
 
     @@volume_id = response.body["id"]
 
-    loop do
-      sleep(3)
-      response = @compute.get_volume(@volume_id)
-      break if response.body["state"] == "active"
+    unless Fog.mock?
+      loop do
+        sleep(3)
+        response = @compute.get_volume(@@volume_id)
+        break if response.body["state"] == "active"
+      end
     end
   end
 
-  def test_a_create_snapshot
+  def test_request_a_create_snapshot
     response = @compute.create_snapshot(@@volume_id)
 
     assert_equal 202, response.status
   end
 
-  def test_b_list_snapshots
-    sleep(10)
+  def test_request_b_list_snapshots
     response = @compute.list_snapshots(@@volume_id)
 
     assert_equal 200, response.status
@@ -47,13 +45,13 @@ class TestSnapshots < Minitest::Test
     @@snapshot_id = response.body["snapshots"][0]["id"]
   end
 
-  def test_c_delete_snapshot
+  def test_request_c_delete_snapshot
     response = @compute.delete_snapshot(@@volume_id, @@snapshot_id)
 
     assert_equal 204, response.status
   end
 
-  def test_e_cleanup
+  def test_request_e_cleanup
     @compute.delete_volume(@@volume_id)
   end
 end

@@ -1,9 +1,6 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
-
-# TestFacilities
+# TestOperatingSystems
 class TestOperatingSystems < Minitest::Test
   def self.test_order
     :alpha
@@ -14,7 +11,7 @@ class TestOperatingSystems < Minitest::Test
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
   end
 
-  def test_list_facilities
+  def test_request_list_facilities
     response = @compute.list_operating_systems
 
     assert !response.body["operating_systems"].empty?
