@@ -7,7 +7,7 @@ module Fog
           request(
             :expects => [201],
             :method => "POST",
-            :path => "/sessions?login=" + login_params[:username] + "&password=" +  login_params[:password]
+            :path => "/sessions?login=" + login_params[:username] + "&password=" + login_params[:password]
           )
         end
       end

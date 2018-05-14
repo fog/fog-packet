@@ -41,8 +41,8 @@ module Fog
         def destroy
           requires :id
 
-          service.delete_email(id)
-          true
+          response = service.delete_email(id)
+          true if response.status == 204
         end
       end
     end

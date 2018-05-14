@@ -7,8 +7,8 @@ module Fog
       class Devices < Fog::Collection
         model Fog::Compute::Packet::Device
 
-        def all(project_id)
-          response = service.list_devices(project_id)
+        def all(project_id, params = {})
+          response = service.list_devices(project_id, params)
           load(response.body["devices"])
         end
 

@@ -3,21 +3,19 @@ module Fog
     class Packet
       # Real
       class Real
-        def get_bandwidth(device_id, from = "", to = "")
-          url = "/devices/" + device_id + "/bandwidth"
-          url += "/?from=" + from + "&until=" + to if from != "" && to != ""
-
+        def get_bandwidth(device_id, params)
           request(
             :expects => [201],
             :method => "GET",
-            :path => url
+            :path => "/devices/" + device_id + "/bandwidth",
+            :params => params
           )
         end
       end
 
       # Mock
       class Mock
-        def get_bandwidth(_device_id, _from = "", _to = "")
+        def get_bandwidth(_device_id, _params = {})
           response = Excon::Response.new
           response.status = 200
           response.body = {

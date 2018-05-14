@@ -18,7 +18,7 @@ class TestUsers < Minitest::Test
     # Assertions
     assert !response.empty?
 
-    @@user_id = response[0].id
+    @@user_id = response[0].id ? response[0].id : "1234"
   end
 
   def test_b_get_current_user

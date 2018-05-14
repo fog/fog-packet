@@ -27,7 +27,6 @@ module Fog
           options[:key] = key
           response = service.create_ssh_key(options)
           merge_attributes(response.body)
-          true
         end
 
         def update
@@ -38,14 +37,13 @@ module Fog
           options[:key] = key
           response = service.update_ssh_key(id, options)
           merge_attributes(response.body)
-          true
         end
 
         def destroy
           requires :id
 
-          service.delete_ssh_key(id)
-          true
+          response = service.delete_ssh_key(id)
+          true if response.status == 204
         end
       end
     end

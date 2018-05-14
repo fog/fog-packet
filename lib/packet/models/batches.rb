@@ -7,8 +7,8 @@ module Fog
       class Batches < Fog::Collection
         model Fog::Compute::Packet::Batch
 
-        def all(project_id)
-          response = service.list_batches(project_id)
+        def all(project_id, params = {})
+          response = service.list_batches(project_id, params)
           load(response.body["batches"])
         end
 

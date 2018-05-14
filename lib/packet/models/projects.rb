@@ -7,16 +7,14 @@ module Fog
       class Projects < Fog::Collection
         model Fog::Compute::Packet::Project
 
-        def all
-          response = service.list_projects
+        def all(params = {})
+          response = service.list_projects(params)
           load(response.body["projects"])
         end
 
         def get(id)
           response = service.get_project(id)
           new(response.body)
-        rescue Excon::Errors::NotFound
-          nil
         end
       end
     end

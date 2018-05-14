@@ -10,15 +10,17 @@ class TestVolumes < Minitest::Test
     # Establish Connection
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
     @project_id = "93125c2a-8b78-4d4f-a3c4-7367d6b7cca8"
+  end
 
-    options = {
+  def test_request_a_create_volume
+    dev = {
       :hostname => "test01",
       :facility => "ewr1",
       :plan => "baremetal_0",
       :operating_system => "coreos_stable"
     }
 
-    response = @compute.create_device(@project_id, options)
+    response = @compute.create_device(@project_id, dev)
 
     @@device_id = response.body["id"]
 
@@ -27,9 +29,7 @@ class TestVolumes < Minitest::Test
       break if response.body["state"] == "active"
       sleep(3)
     end
-  end
 
-  def test_request_a_create_volume
     options = {
       :facility => "ewr1",
       :plan => "storage_1",

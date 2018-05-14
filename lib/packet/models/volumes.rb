@@ -7,8 +7,8 @@ module Fog
       class Volumes < Fog::Collection
         model Fog::Compute::Packet::Volume
 
-        def all(project_id)
-          response = service.list_volumes(project_id)
+        def all(project_id, params = {})
+          response = service.list_volumes(project_id, params)
 
           load(response.body["volumes"])
         end

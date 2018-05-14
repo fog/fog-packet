@@ -8,7 +8,7 @@ class TestSSHKeys < Minitest::Test
 
   def setup
     # Establish Connection
-    @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
+    @compute = Fog::Compute::Packet.new()
   end
 
   def test_a_create_ssh_key
@@ -27,7 +27,7 @@ class TestSSHKeys < Minitest::Test
   end
 
   def test_b_list_ssh_keys
-    response = @compute.ssh_keys.all
+    response = @compute.ssh_keys.all(:include => "test")
 
     assert !response.empty?
   end
@@ -46,7 +46,7 @@ class TestSSHKeys < Minitest::Test
 
     response = sshkey.update
 
-    assert_equal true, response
+    assert response
   end
 
   def test_h_delete_ssh_key

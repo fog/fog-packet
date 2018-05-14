@@ -7,16 +7,14 @@ module Fog
       class SshKeys < Fog::Collection
         model Fog::Compute::Packet::SshKey
 
-        def all(project_id = "")
-          response = service.list_ssh_keys(project_id)
+        def all(project_id = "", include = "")
+          response = service.list_ssh_keys(project_id, include)
           load(response.body["ssh_keys"])
         end
 
         def get(id)
           response = service.get_ssh_key(id)
           new(response.body)
-        rescue Excon::Errors::NotFound
-          nil
         end
       end
     end

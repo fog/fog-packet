@@ -11,8 +11,8 @@ module Fog
           true
         end
 
-        def all
-          response = service.list_sessions
+        def all(params = {})
+          response = service.list_sessions(params)
           load(response.body["sessions"])
         end
 

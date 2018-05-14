@@ -34,9 +34,9 @@ module Fog
             },
             "size" => options[:size],
             "project" => {
-            "href" => "/"
+              "href" => "/"
             }
-        }
+          }
 
           response
         end

@@ -22,7 +22,7 @@ class TestLicenses < Minitest::Test
     response = @compute.create_license(@project_id, options)
 
     assert_equal 201, response.status
-    @@license_id =  response.body["id"]
+    @@license_id = response.body["id"]
   end
 
   def test_request_b_list_licenses
@@ -40,7 +40,7 @@ class TestLicenses < Minitest::Test
   def test_request_d_update_license
     options = {
       :description => "test02",
-      :size => "1",
+      :size => "1"
     }
 
     response = @compute.update_license(@@license_id, options)

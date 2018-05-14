@@ -41,34 +41,34 @@ module Fog
 
         def bond(bulk_enable)
           requires :id
-          service.bond_ports(id, bulk_enable)
-          true
+          response = service.bond_ports(id, bulk_enable)
+          true if response.status == 200
         end
 
         def disbond(bulk_disable)
           requires :id
-          service.disbond_ports(id, bulk_disable)
-          true
+          response = service.disbond_ports(id, bulk_disable)
+          true if response.status == 200
         end
 
         def assign_port(port_id)
           requires :id
 
-          service.assign_port(port_id, id)
-          true
+          response = service.assign_port(port_id, id)
+          true if response.status == 200
         end
 
         def unassign_port(port_id)
           requires :id
 
-          service.unassign_port(port_id, id)
-          true
+          response = service.unassign_port(port_id, id)
+          true if response.status == 200
         end
 
         def destroy
           requires :id
-          service.delete_virtual_network(id)
-          true
+          response = service.delete_virtual_network(id)
+          true if response.status == 204
         end
       end
     end
