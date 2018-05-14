@@ -24,7 +24,7 @@ class TestDevices < Minitest::Test
   end
 
   def test_b_list_device
-    devices = @compute.devices.all(@project_id)
+    devices = @compute.devices.all(@project_id, :per_page => 1, :page => 1, :include => "project")
 
     assert !devices.empty?
   end
@@ -39,7 +39,6 @@ class TestDevices < Minitest::Test
     device = @compute.devices.get(@@device_id)
     device.hostname = "test02"
     device.update
-    # device = @compute.devices.get(@@device_id)
 
     assert_equal "test02", device.hostname
   end
@@ -59,7 +58,7 @@ class TestDevices < Minitest::Test
     response = device.stop
     assert_equal true, response
 
-    device.wait_for { "inactive" } unless Fog.mock?
+    device.wait_for { inactive? } unless Fog.mock?
   end
 
   def test_g_poweron_device
@@ -81,7 +80,7 @@ class TestDevices < Minitest::Test
   end
 
   def test_i_get_bandwidth
-    response = @compute.bandwidth.get(@@device_id)
+    response = @compute.bandwidth.get(@@device_id, :to => "12-12-2017", :from => "11-11-2017")
 
     assert_equal 200, response.status
   end

@@ -46,13 +46,13 @@ module Fog
           options[:address] = address
           options[:manageable] = manageable
 
-          service.assign_ip(device_id, options)
-          true
+          response = service.assign_ip(device_id, options)
+          true if response.status == 201
         end
 
         def unassign
-          service.unassign_ip(id)
-          true
+          response = service.unassign_ip(id)
+          true if response.status == 204
         end
       end
     end

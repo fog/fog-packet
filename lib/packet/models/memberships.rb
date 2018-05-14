@@ -7,8 +7,8 @@ module Fog
       class Memberships < Fog::Collection
         model Fog::Compute::Packet::Membership
 
-        def all(project_id)
-          response = service.list_memberships(project_id)
+        def all(project_id, params = {})
+          response = service.list_memberships(project_id, params)
           load(response.body["memberships"])
         end
 

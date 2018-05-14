@@ -3,21 +3,27 @@ module Fog
     class Packet
       # Real
       class Real
-        def list_ssh_keys(project_id = "")
+        def list_ssh_keys(project_id = "", params = {})
+          p project_id
+          p params
           url = "/ssh-keys"
-          url = "/projects/" + project_id + "/ssh-keys" if project_id != ""
-
+          if project_id.class == Hash
+            params = project_id
+          elsif project_id.class == String
+            url = "/projects/" + project_id + "/ssh-keys" unless project_id == ""
+          end
           request(
             :expects => [200],
             :method => "GET",
-            :path => url
+            :path => url,
+            :params => params
           )
         end
       end
 
       # Mock
       class Mock
-        def list_ssh_keys(_project_id = "")
+        def list_ssh_keys(_project_id = "", _params = {})
           response = Excon::Response.new
           response.status = 200
           response.body = {

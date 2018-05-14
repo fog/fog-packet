@@ -3,18 +3,19 @@ module Fog
     class Packet
       # Real
       class Real
-        def list_projects
+        def list_projects(params = {})
           request(
             :expects => [200],
             :method => "GET",
-            :path => "/projects"
+            :path => "/projects",
+            :params => params
           )
         end
       end
 
       # Mock
       class Mock
-        def list_projects
+        def list_projects(_params = {})
           response = Excon::Response.new
           response.status = 200
           response.body = {

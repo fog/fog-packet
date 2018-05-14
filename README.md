@@ -1,6 +1,38 @@
 # fog-packet
 WIP: Packet provider for Fog
 
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Authentication](#authentication)
+- [Operations](#operations)
+  * [Devices](#devices)
+  * [Volumes](#volumes)
+  * [Snapshots](#snapshots)
+  * [IP Addresses](#ip-addresses)
+  * [Projects](#projects)
+  * [Plans](#plans)
+  * [Facilities](#facilities)
+  * [Users](#users)
+  * [Emails](#emails)
+  * [VPN](#vpn)
+  * [Spot Market Prices](#spot-market-prices)
+  * [SSH Keys](#ssh-keys)
+  * [Batches](#batches)
+  * [BGP Sessions](#bgp-sessions)
+  * [Two Factor Authentication](#two-factor-authentication)
+  * [Sessions](#sessions)
+  * [Notifications](#notifications)
+  * [Invitations](#invitations)
+  * [UserVerificationTokens](#userverificationtokens)
+  * [Licenses](#licenses)
+  * [Memberships](#memberships)
+  * [Capacity](#capacity)
+  * [Payment Methods](#payment-methods)
+  * [Project Transfer Requests](#project-transfer-requests)
+  * [Hardware Reservations](#hardware-reservations)
+- [Unit Tests](#unit-tests)
 # Requirements 
 
 1. Ruby programming language
@@ -173,6 +205,15 @@ List all volumes in the specified project
 response = compute.volumes.all(project_id)
 ```
 
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
+
 ## Attach a volume
 
 Attaches a volume to the specified device
@@ -196,7 +237,7 @@ Deletes a specified volume
 response = volume.destroy
 ```
 
-## Snapshot
+## Snapshots
 
 ## Create a snapshot of a volume
 Creates a snapshot of the specified volume
@@ -211,6 +252,16 @@ List all snapshots of the specified volume
 ```ruby
 response = compute.snapshots.all(volume_id)
 ```
+
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
+
 
 ## Delete a snapshot
 Deletes the specified snapshot
@@ -242,6 +293,15 @@ Retrives the list of IP addresses under the specified project
 ```ruby
 response = compute.ips.all(project_id)
 ```
+
+Optional parameters
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
 
 ## Assign an IP address
 Assigns an IP address to the specified devices
@@ -293,6 +353,15 @@ List all available plans of the account
 response = compute.plans.all
 ```
 
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
+
 ## Facilities
 
 ## List facilities
@@ -302,6 +371,15 @@ List all available facilities of the account
 response = compute.facilities.all
 ```
 
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
+
 ## Users
 
 ## List Users
@@ -310,6 +388,15 @@ List all users in the current user’s projects
 ```ruby
 response = compute.users.all
 ```
+
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
 
 ## Retrieve a user
 
@@ -478,6 +565,12 @@ response = compute.ssh_keys.all
 response = compute.ssh_keys.all(project_id)
 ```
 
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
+
 ## Retrieve a SSH key
 
 Returns a single ssh key
@@ -543,6 +636,15 @@ Returns all batches for the given project.
 ```ruby
 response = compute.batches.all(project_id)
 ```
+
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
 
 ## Retrieve a batch
 Returns a batch
@@ -625,6 +727,15 @@ Returns all session tokens for the current user.
 sessions = compute.sessions.all
 ```
 
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
+
 ## Delete session
 Destroy users current session unless sessions_id is provided.
 
@@ -640,6 +751,15 @@ Returns a collection of the current user’s notification.
 ```ruby
 compute.notifications.all
 ```
+
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
 
 ## Retrieve a notification
 Returns a single notification if the user has access.
@@ -663,6 +783,15 @@ Returns all invitations in a project.
 ```ruby
 compute.invitations.all(project_id)
 ```
+
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
 
 ## Retrieve an invite
 Returns a single invitation.
@@ -731,6 +860,15 @@ Provides a collection of licenses for a given project.
 compute.licenses.all(project_id)
 ```
 
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
+
 ## Retrieve a License
 Returns a license.
 
@@ -746,6 +884,15 @@ Returns all memberships in a project.
 ```ruby
 memberships = compute.memberships.all(project_id)
 ```
+
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
 
 ## Retrieve a membership
 Returns a single membership.
@@ -766,6 +913,252 @@ Deletes the membership.
 
 ```ruby
 membership.destroy
+```
+## Organizations
+
+## Create an organization
+Creates an organization.
+
+```ruby
+options = {
+  :name => "test_org",
+  :description => "test organization"
+}
+
+response = compute.organizations.create(options)
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| name | string | Name for the organization | Yes |
+| description | string | | No |
+| website | string | | No |
+| twitter | string | | No |
+| logo | string | | No |
+| address | string | | No |
+| customdata | string | | No |
+
+## Update an organization
+Updates the organization.
+
+```ruby
+org.name = "new name"
+org.description = "new organization"
+
+response = org.update
+```
+
+## Retrieve an organization
+Returns a single organization's details, if the user is authorized to view it.
+
+```ruby
+org = compute.organizations.get(org_id)
+```
+
+## List organizations
+Returns a list of organizations that are accessible to the current user.
+
+```ruby
+response = compute.organizations.all
+```
+
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| personal | string |  | 
+| without_projects | string | | 
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
+
+
+## Delete an organization
+Deletes the organization.
+
+```ruby
+response = org.destroy
+```
+
+## Capacity
+
+## Get capacity
+Returns a list of facilities and plans with their current capacity.
+
+```ruby 
+response = compute.capacities.all
+```
+
+## Validate required capacity
+Validates if a deploy can be fulfilled. 
+
+```ruby
+options = {
+  :servers => [
+    {
+      :facility => "ewr1",
+      :plan => "baremetal_2a",
+      :quantity => 1
+    },
+    {
+      :facility => "atl1",
+      :plan => "baremetal_1e",
+      :quantity => 1
+    }
+  ]
+}
+
+response = compute.capacities.validate(options)
+```
+
+If required capacities are available function will return true otherwise it will return an error with details.
+
+## Payment methods
+
+## Create a payment method
+Creates a payment method.
+
+```ruby
+options = {
+    :name => "test",
+    :default => "false",
+    :nonce => "12",
+    :organization_id => "ef114acb-2e50-43b5-83e7-b7c2758f0520"
+}
+
+response = compute.payment_methods.create(options)
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| organization_id | string |  | Yes |
+| name | string |  | Yes |
+| nonce | string | | Yes |
+| default | boolean | | No |
+
+
+## List payment methods 
+Returns all payment methods of an organization.
+
+```ruby
+payment_methods = compute.payment_methods.all(org_id)
+```
+
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
+
+## Retrieve a payment method
+Returns a payment method.
+
+```ruby
+payment_method = compute.payment_methods.get(payment_method_id)
+```
+
+## Update payment method
+Updates the payment method.
+
+```ruby
+payment_method.name = "new name"
+payment_method.expiration_month = 12
+payment_method.expiration_year = 2022
+response = payment_method.update
+```
+
+## Delete payment method
+Deletes the payment method.
+
+```ruby
+response = payment_method.destroy
+```
+
+## Project transfer requests
+
+## Transfer a project
+Organization owners can transfer their projects to other organizations.
+
+```ruby
+response = compute.transfer_requests.transfer(project_id, org_id)
+```
+
+Available parameters
+
+| NAME| TYPE | DESCRIPTION | REQUIRED |
+|---|---|---|---|
+| project_id | string | UUID of the project to be transfered  | Yes |
+| org_id | string | UUID of the target organization  | Yes |
+
+## List transfer requests
+Provides a collection of project transfer requests from or to the organization.
+
+```ruby
+response = compute.transfer_requests.all(org_id)
+```
+
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
+
+## Retrieve a transfer request
+Returns a single transfer request.
+
+```ruby
+transfer_request = compute.transfer_requests.get(transfer_request_id)
+```
+
+## Accept a transfer request
+Accept a transfer request.
+
+```ruby
+response = transfer_request.accept
+```
+
+## Decline a transfer request
+Decline a transfer request.
+
+```ruby
+response = transfer_request.decline
+```
+
+## Hardware reservations
+
+## List hardware reservations
+Provides a collection of hardware reservations for a given project.
+
+```ruby
+hardware_reservations = compute.hardware_reservations.all(project_id)
+```
+
+Optional parameters 
+
+| NAME| TYPE | DESCRIPTION | 
+|---|---|---|
+| per_page | string | | 
+| page | string | | 
+| include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
+
+## Retrieve a hardware reservation
+Returns a single hardware reservation.
+
+```ruby
+hardware_reservation = @compute.hardware_reservations.get(reservation_id)
+```
+
+## Move a hardware reservation
+Move a hardware reservation to another project.
+
+```ruby
+hardware_reservation.move(project_id) 
 ```
 
 ## Unit tests

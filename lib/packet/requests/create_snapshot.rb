@@ -17,7 +17,6 @@ module Fog
         def create_snapshot(_storage_id)
           response = Excon::Response.new
           response.status = 202
-
           response
         end
       end

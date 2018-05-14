@@ -10,29 +10,28 @@ class TestBGPSessions < Minitest::Test
     # Establish Connection
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
     @project_id = "93125c2a-8b78-4d4f-a3c4-7367d6b7cca8"
+  end
 
-    options = {
+  def test_request_a_create_bgp_session
+    dev = {
       :hostname => "test01",
       :facility => "ewr1",
       :plan => "baremetal_0",
       :operating_system => "coreos_stable"
     }
 
-    response = @compute.create_device(@project_id, options)
+    response = @compute.create_device(@project_id, dev)
 
-    @device_id = response.body["id"]
+    @@device_id = response.body["id"]
     loop do
-      response = @compute.get_device(@device_id)
+      response = @compute.get_device(@@device_id)
       break if response.body["state"] == "active"
       sleep(3)
     end
-    @device_id = response.body["id"]
-  end
 
-  def test_request_a_create_bgp_session
     # Perform Request
     address_family = "ipv4"
-    response = @compute.create_bgp_session(@device_id, address_family)
+    response = @compute.create_bgp_session(@@device_id, address_family)
 
     # Assertions
     assert_equal 201, response.status
@@ -48,7 +47,7 @@ class TestBGPSessions < Minitest::Test
   end
 
   def test_request_d_get_bgp_sessions
-    response = @compute.list_bgp_sessions(@device_id)
+    response = @compute.list_bgp_sessions(@@device_id)
 
     assert !response.body["bgp_sessions"].empty?
   end
@@ -60,6 +59,6 @@ class TestBGPSessions < Minitest::Test
   end
 
   def test_request_z_cleanup
-    @compute.delete_device(@device_id)
+    @compute.delete_device(@@device_id)
   end
 end

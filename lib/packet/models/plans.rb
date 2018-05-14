@@ -7,8 +7,8 @@ module Fog
       class Plans < Fog::Collection
         model Fog::Compute::Packet::Plans
 
-        def all
-          response = service.list_plans
+        def all(params = {})
+          response = service.list_plans(params)
           load(response.body["plans"])
         end
       end

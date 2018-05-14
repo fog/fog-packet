@@ -4,13 +4,13 @@ module Fog
       # TwoFactorAuth Collection
       class TwoFactorAuth < Fog::Collection
         def enable(type)
-          service.enable_two_factor_auth(type)
-          true
+          response = service.enable_two_factor_auth(type)
+          true if response.status == 200
         end
 
         def disable(type)
-          service.disable_two_factor_auth(type)
-          true
+          response = service.disable_two_factor_auth(type)
+          true if response.status == 204
         end
       end
     end

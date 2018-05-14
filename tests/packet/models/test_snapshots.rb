@@ -14,9 +14,7 @@ class TestSnapshots < Minitest::Test
     volume = @compute.volumes.create(:project_id => @project_id, :facility => "ewr1", :plan => "storage_1", :size => 20, :description => "test description", :billing_cycle => "hourly")
 
     @@volume_id = volume.id
-    unless Fog.mock?
-      volume.wait_for { ready? }
-    end
+    volume.wait_for { ready? } unless Fog.mock?
   end
 
   def test_a_create_snapshot

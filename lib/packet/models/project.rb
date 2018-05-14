@@ -33,14 +33,13 @@ module Fog
           options[:payment_method_id] = payment_method_id if payment_method_id
           response = service.create_project(options)
           merge_attributes(response.body)
-          true
         end
 
         def destroy
           requires :id
 
-          service.delete_project(id)
-          true
+          response = service.delete_project(id)
+          true if response.status == 204
         end
       end
     end

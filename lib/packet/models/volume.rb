@@ -42,7 +42,6 @@ module Fog
 
           response = service.create_volume(project_id, options)
           merge_attributes(response.body)
-          true
         end
 
         def update
@@ -68,15 +67,15 @@ module Fog
         def detach
           requires :id
 
-          service.detach_volume(id)
-          true
+          response = service.detach_volume(id)
+          true if response.status == 204
         end
 
         def destroy
           requires :id
 
-          service.delete_volume(id)
-          true
+          response = service.delete_volume(id)
+          true if response.status == 204
         end
 
         def reload

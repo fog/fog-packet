@@ -14,7 +14,7 @@ module Fog
 
       # Mock
       class Mock
-        def delete_membership(id)
+        def delete_membership(_id)
           response = Excon::Response.new
           response.status = 204
           response

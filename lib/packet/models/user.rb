@@ -50,13 +50,6 @@ module Fog
 
           merge_attributes(response.body)
         end
-
-        def destroy
-          requires :id
-
-          service.delete_email(id)
-          true
-        end
       end
     end
   end

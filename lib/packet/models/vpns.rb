@@ -10,18 +10,16 @@ module Fog
         def get(facility_code)
           response = service.get_vpn(facility_code)
           new(response.body)
-        rescue Excon::Errors::NotFound
-          nil
         end
 
         def enable
-          service.enable_vpn
-          true
+          response = service.enable_vpn
+          true if response.status == 201
         end
 
         def disable
-          service.disable_vpn
-          true
+          response = service.disable_vpn
+          true if response.status == 204
         end
       end
     end

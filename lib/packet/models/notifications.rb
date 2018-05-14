@@ -7,8 +7,8 @@ module Fog
       class Notifications < Fog::Collection
         model Fog::Compute::Packet::Notification
 
-        def all
-          response = service.list_notifications
+        def all(params = {})
+          response = service.list_notifications(params)
           load(response.body["notifications"])
         end
 

@@ -20,7 +20,7 @@ class TestSessions < Minitest::Test
   end
 
   def test_request_b_session_login
-    response = @compute.session_login(:username => "username",:password => "password")
+    response = @compute.session_login(:username => "username", :password => "password")
 
     assert_equal 201, response.status
   end

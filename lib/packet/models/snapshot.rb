@@ -17,15 +17,15 @@ module Fog
 
         def save
           requires :storage_id
-          service.create_snapshot(storage_id)
-          true
+          response = service.create_snapshot(storage_id)
+          true if response.status == 202
         end
 
         def destroy(volume_id)
           requires :id
 
-          service.delete_snapshot(volume_id, id)
-          true
+          response = service.delete_snapshot(volume_id, id)
+          true if response.status == 204
         end
       end
     end
