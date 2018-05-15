@@ -1,7 +1,5 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
 # TestUsers
 class TestUsers < Minitest::Test
   def self.test_order
@@ -20,7 +18,7 @@ class TestUsers < Minitest::Test
     # Assertions
     assert !response.empty?
 
-    @@user_id = response[0].id
+    @@user_id = response[0].id ? response[0].id : "1234"
   end
 
   def test_b_get_current_user
@@ -43,7 +41,7 @@ class TestUsers < Minitest::Test
 
     response = user.update
 
-    assert_equal "Test", response.first_name
-    assert_equal "Testing", response.last_name
+    assert_equal "Jane", response.first_name
+    assert_equal "Doe", response.last_name
   end
 end

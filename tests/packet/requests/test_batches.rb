@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestBatches
 class TestBatches < Minitest::Test
@@ -15,7 +12,7 @@ class TestBatches < Minitest::Test
     @project_id = "93125c2a-8b78-4d4f-a3c4-7367d6b7cca8"
   end
 
-  def test_create_batch
+  def test_request_a_create_batch
     options = [{
       "hostname" => "test1",
       "description" => "test batch",
@@ -34,13 +31,13 @@ class TestBatches < Minitest::Test
     @@batch_id = response.body["batches"][0]["id"]
   end
 
-  def test_get_batch
+  def test_request_b_get_batch
     response = @compute.get_batch(@@batch_id)
 
     assert_equal @@batch_id, response.body["id"]
   end
 
-  def test_list_batches
+  def test_request_c_list_batches
     response = @compute.list_batches(@project_id)
 
     assert !response.body["batches"].empty?

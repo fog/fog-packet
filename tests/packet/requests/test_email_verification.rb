@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestEmailVerification
 class TestEmailVerification < Minitest::Test
@@ -20,7 +17,7 @@ class TestEmailVerification < Minitest::Test
     assert_equal 201, response.status
   end
 
-  def test_verify_email
+  def test_request_verify_email
     response = @compute.verify_email("token1234!")
 
     assert_equal 200, response.status

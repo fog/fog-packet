@@ -5,6 +5,7 @@ module Fog
       class Device < Fog::Model
         identity :id
 
+        attribute :short_id
         attribute :hostname
         attribute :plan
         attribute :facility
@@ -70,7 +71,6 @@ module Fog
 
           response = service.create_device(project_id, options)
           merge_attributes(response.body)
-          true
         end
 
         def update
@@ -89,40 +89,46 @@ module Fog
 
           response = service.update_device(id, options)
           merge_attributes(response.body)
-          true
         end
 
         def reboot
           requires :id
-          service.reboot_device(id)
-          true
+          response = service.reboot_device(id)
+          true if response.status == 202
         end
 
         def start
           requires :id
-          service.poweron_device(id)
-          true
+          response = service.poweron_device(id)
+          true if response.status == 202
         end
 
         def stop
           requires :id
-          service.poweroff_device(id)
-          true
+          response = service.poweroff_device(id)
+          true if response.status == 202
         end
 
         def destroy
           requires :id
 
-          service.delete_device(id)
-          true
+          response = service.delete_device(id)
+          true if response.status == 204
         end
 
         def reload
           requires :id
-          data = service.get_device(id)
+          response = service.get_device(id)
+          return unless response.body
+          merge_attributes(response.body)
+        end
 
-          return unless data
-          self
+        def ready?
+          state == "active"
+        end
+
+        def inactive?
+          state == "inactive"
         end
       end
     end

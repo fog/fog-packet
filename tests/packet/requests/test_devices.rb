@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestDevices
 class TestDevices < Minitest::Test
@@ -15,7 +12,7 @@ class TestDevices < Minitest::Test
     @project_id = "93125c2a-8b78-4d4f-a3c4-7367d6b7cca8"
   end
 
-  def test_a_create_device
+  def test_request_a_create_device
     options = {
       :hostname => "test01",
       :facility => "ewr1",
@@ -39,14 +36,14 @@ class TestDevices < Minitest::Test
     end
   end
 
-  def test_b_get_device
+  def test_request_b_get_device
     response = @compute.get_device(@@device_id)
 
     assert_equal 200, response.status
     assert_equal @@device_id, response.body["id"]
   end
 
-  def test_c_update_device
+  def test_request_c_update_device
     options = {
       :hostname => "test02"
     }
@@ -56,7 +53,7 @@ class TestDevices < Minitest::Test
     assert_equal options[:hostname], response.body["hostname"]
   end
 
-  def test_d_reboot_device
+  def test_request_d_reboot_device
     response = @compute.reboot_device(@@device_id)
 
     assert_equal 202, response.status
@@ -68,19 +65,13 @@ class TestDevices < Minitest::Test
     end
   end
 
-  def test_f_poweroff_device
+  def test_request_f_poweroff_device
     response = @compute.poweroff_device(@@device_id)
 
     assert_equal 202, response.status
-
-    loop do
-      response = @compute.get_device(@@device_id)
-      break if response.body["state"] == "inactive"
-      sleep(3)
-    end
   end
 
-  def test_g_poweron_device
+  def test_request_g_poweron_device
     response = @compute.poweron_device(@@device_id)
 
     assert_equal 202, response.status
@@ -92,20 +83,20 @@ class TestDevices < Minitest::Test
     end
   end
 
-  def test_h_get_events
+  def test_request_h_get_events
     response = @compute.list_events(@@device_id)
 
     assert_equal 200, response.status
     assert !response.body["events"].empty?
   end
 
-  def test_i_get_bandwidth
+  def test_request_i_get_bandwidth
     response = @compute.get_bandwidth(@@device_id)
 
     assert_equal 200, response.status
   end
 
-  def test_z_delete_device
+  def test_request_z_delete_device
     response = @compute.delete_device(@@device_id)
 
     assert_equal 204, response.status

@@ -26,7 +26,7 @@ module Fog
           response.body = {
             "id" => "7722a922-d66e-4afa-bf5e-a7aec8955016",
             "label" => "test",
-            "key" => "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDgnV5MOhBqpQLt66KGlMKi",
+            "key" => "ssh-rsa AAAAB3Nz",
             "fingerprint" => "0c:a9:79:a9:d7:29:49:5d:0e:43:41:bc:dc:4d:ac:78",
             "created_at" => "2018-03-27T10:46:33Z",
             "updated_at" => "2018-03-27T10:46:33Z",

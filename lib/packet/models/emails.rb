@@ -10,8 +10,6 @@ module Fog
         def get(id)
           response = service.get_email(id)
           new(response.body)
-        rescue Excon::Errors::NotFound
-          nil
         end
       end
     end

@@ -1,8 +1,6 @@
 require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
 
-Fog.mock!
-# TestProjects
+# TestVpns
 class TestVpns < Minitest::Test
   def self.test_order
     :alpha
@@ -13,7 +11,7 @@ class TestVpns < Minitest::Test
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
   end
 
-  def test_a_enable_vpn
+  def test_request_a_enable_vpn
     # Perform Request
     response = @compute.enable_vpn
 
@@ -21,7 +19,7 @@ class TestVpns < Minitest::Test
     assert_equal 201, response.status
   end
 
-  def test_b_get_vpn
+  def test_request_b_get_vpn
     # Perform Request
     response = @compute.get_vpn("ewr1")
 
@@ -30,7 +28,7 @@ class TestVpns < Minitest::Test
     assert response.body["config"]
   end
 
-  def test_c_disable_vpn
+  def test_request_c_disable_vpn
     # Perform Request
     response = @compute.disable_vpn
 

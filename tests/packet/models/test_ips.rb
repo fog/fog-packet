@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestIps
 class TestIps < Minitest::Test
@@ -12,18 +9,15 @@ class TestIps < Minitest::Test
   def setup
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
     @project_id = "93125c2a-8b78-4d4f-a3c4-7367d6b7cca8"
-
-    device = @compute.devices.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
-
-    loop do
-      response = device.reload
-      break if response.state == "active"
-      sleep(3)
-    end
-    @device_id = device.id
   end
 
   def test_a_reserve_ip
+    device = @compute.devices.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
+
+    device.wait_for { ready? }
+
+    @@device_id = device.id
+
     response = @compute.ips.create(:project_id => @project_id, :facility => "ewr1", :quantity => 2, :type => "global_ipv4", :comments => "test comment")
 
     @@address = response.address
@@ -44,7 +38,7 @@ class TestIps < Minitest::Test
 
   def test_d_assign
     ip = @compute.ips.get(@@ip_id)
-    response = ip.assign(@device_id)
+    response = ip.assign(@@device_id)
 
     assert response
   end

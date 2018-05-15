@@ -1,7 +1,5 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
 # TestUsers
 class TestUsers < Minitest::Test
   def self.test_order
@@ -13,7 +11,7 @@ class TestUsers < Minitest::Test
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
   end
 
-  def test_a_list_users
+  def test_request_a_list_users
     # Perform Request
     response = @compute.list_users
 
@@ -23,19 +21,19 @@ class TestUsers < Minitest::Test
     @@user_id = response.body["users"][0]["id"]
   end
 
-  def test_b_get_current_user
+  def test_request_b_get_current_user
     response = @compute.get_user
     assert_equal response.status, 200
   end
 
-  def test_c_get_user
+  def test_request_c_get_user
     response = @compute.get_user(@@user_id)
 
     assert_equal response.status, 200
     assert_equal @@user_id, response.body["id"]
   end
 
-  def test_d_update_user
+  def test_request_d_update_user
     options = {
       :first_name => "Jane",
       :last_name => "Doe"

@@ -12,7 +12,7 @@ require_relative "packet/compute"
 module Fog
   # Compute
   module Compute
-    autoload :Packet, File.expand_path('../packet/compute', __FILE__)
+    autoload :Packet, File.expand_path("../packet/compute", __FILE__)
   end
 
   # Models

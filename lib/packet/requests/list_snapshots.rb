@@ -3,19 +3,19 @@ module Fog
     class Packet
       # Real
       class Real
-        def list_snapshots(volume_id)
+        def list_snapshots(volume_id, params = {})
           request(
             :expects => [200],
             :method => "GET",
             :path => "/storage/" + volume_id + "/snapshots",
-            # body: Fog::JSON.encode(snapshot)
+            :params => params
           )
         end
       end
 
       # Mock
       class Mock
-        def list_snapshots(_volume_id)
+        def list_snapshots(_volume_id, _params = {})
           response = Excon::Response.new
           response.status = 200
           response.body = {

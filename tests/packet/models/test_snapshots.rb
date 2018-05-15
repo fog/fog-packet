@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestSnapshots
 class TestSnapshots < Minitest::Test
@@ -17,17 +14,12 @@ class TestSnapshots < Minitest::Test
     volume = @compute.volumes.create(:project_id => @project_id, :facility => "ewr1", :plan => "storage_1", :size => 20, :description => "test description", :billing_cycle => "hourly")
 
     @@volume_id = volume.id
-    p @@volume_id
-    loop do
-      sleep(3)
-      response = volume.reload
-      break if response.state == "active"
-    end
+    volume.wait_for { ready? } unless Fog.mock?
   end
 
   def test_a_create_snapshot
-    @compute.snapshots.create(:storage_id => @@volume_id)
-    assert_equal true, response
+    response = @compute.snapshots.create(:storage_id => @@volume_id)
+    assert response
   end
 
   def test_b_list_snapshots
@@ -44,7 +36,6 @@ class TestSnapshots < Minitest::Test
   end
 
   def test_e_cleanup
-    p "cleanup"
     volume = @compute.volumes.get(@@volume_id)
     response = volume.destroy
     assert_equal true, response

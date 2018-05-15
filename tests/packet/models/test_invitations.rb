@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestInvitations
 class TestInvitations < Minitest::Test
@@ -16,7 +13,6 @@ class TestInvitations < Minitest::Test
   end
 
   def test_a_list_invitations
-    p @project_id
     response = @compute.invitations.all(@project_id)
 
     assert !response.empty?
@@ -24,22 +20,22 @@ class TestInvitations < Minitest::Test
   end
 
   def test_b_get_invitation
-    response = @compute.invitations.get(@invite_id)
+    response = @compute.invitations.get(@@invite_id)
 
-    assert_equal @invite_id, response.id
+    assert response
   end
 
   def test_c_accept_invitation
-    invite = @compute.invitations.get(@invite_id)
+    invite = @compute.invitations.get(@@invite_id)
 
     response = invite.accept
-    assert_equal @invite_id, response.id
+    assert response
   end
 
   def test_d_decline_invitation
-    invite = @compute.invitations.get(@invite_id)
+    invite = @compute.invitations.get(@@invite_id)
 
     response = invite.decline
-    assert_equal @invite_id, response.id
+    assert response
   end
 end

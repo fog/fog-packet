@@ -6,7 +6,7 @@ module Fog
 
       SUCCESS_CODES = [200, 201, 202, 204].freeze
 
-      requires :packet_token
+      recognizes :packet_token
 
       recognizes :packet_url
 
@@ -83,6 +83,24 @@ module Fog
 
       model :license
       collection :licenses
+
+      model :membership
+      collection :memberships
+
+      model :organization
+      collection :organizations
+
+      model :capacity
+      collection :capacities
+
+      model :payment_method
+      collection :payment_methods
+
+      model :transfer_request
+      collection :transfer_requests
+
+      model :hardware_reservation
+      collection :hardware_reservations
 
       # Requests
       request_path "packet/requests"
@@ -189,11 +207,46 @@ module Fog
       request :update_license
       request :delete_license
 
+      request :list_memberships
+      request :get_membership
+      request :update_membership
+      request :delete_membership
+
+      request :list_organizations
+      request :get_organization
+      request :create_organization
+      request :delete_organization
+      request :update_organization
+
+      request :get_capacity
+      request :validate_capacity
+
+      request :list_payment_methods
+      request :create_payment_method
+      request :update_payment_method
+      request :get_payment_method
+      request :delete_payment_method
+
+      request :list_transfer_requests
+      request :transfer_project
+      request :get_transfer_request
+      request :accept_transfer_request
+      request :decline_transfer_request
+
+      request :list_hardware_reservations
+      request :get_hardware_reservation
+      request :move_hardware_reservation
+
       # Real
       class Real
         def initialize(options = {})
-          @packet_token = options[:packet_token]
-          @base_url = "https://api.packet.net/"
+          if options[:packet_token] == ""
+            @packet_token = options[:packet_token]
+          else
+            @packet_token = ENV["PACKET_TOKEN"]
+          end
+          raise "Packet token is not present. Please pass it as an argument or set environment variable 'PACKET_TOKEN'." if @packet_token == ""
+          @base_url = options[:packet_url] ? options[:packet_url] : "https://api.packet.net/" 
           @version = ""
           @header = {
             "X-Auth-Token" => @packet_token,
@@ -230,9 +283,9 @@ module Fog
             raise "Internal Server Error. Please try again."
           end
           # Raise exception if a bad status code is returned
-          # unless SUCCESS_CODES.include? response.status
-          #   raise response.status
-          # end
+          unless SUCCESS_CODES.include? response.status
+            raise response.status.to_s + " " + response.body.to_s
+          end
 
           response
         end
@@ -241,7 +294,14 @@ module Fog
       # Mock
       class Mock
         def initialize(options = {})
-          @packet_token = options[:packet_token]
+          if options[:packet_token] == ""
+            @packet_token = options[:packet_token]
+          else
+            @packet_token = ENV["PACKET_TOKEN"]
+          end
+          
+          raise "Packet token is not present. Please pass it as an argument or set environment variable 'PACKET_TOKEN'." unless @packet_token
+          @base_url = options[:packet_url] ? options[:packet_url] : "https://api.packet.net/"
         end
 
         def data

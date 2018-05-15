@@ -7,8 +7,8 @@ module Fog
       class Licenses < Fog::Collection
         model Fog::Compute::Packet::License
 
-        def all(project_id)
-          response = service.list_licenses(project_id)
+        def all(project_id, params = {})
+          response = service.list_licenses(project_id, params)
           load(response.body["licenses"])
         end
 

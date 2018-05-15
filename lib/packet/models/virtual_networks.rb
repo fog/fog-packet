@@ -7,8 +7,8 @@ module Fog
       class VirtualNetworks < Fog::Collection
         model Fog::Compute::Packet::VirtualNetwork
 
-        def all(project_id)
-          response = service.list_virtual_networks(project_id)
+        def all(project_id, params = {})
+          response = service.list_virtual_networks(project_id, params)
           load(response.body["virtual_networks"])
         end
       end

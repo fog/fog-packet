@@ -7,8 +7,8 @@ module Fog
       class Snapshots < Fog::Collection
         model Fog::Compute::Packet::Snapshot
 
-        def all(volume_id)
-          response = service.list_snapshots(volume_id)
+        def all(volume_id, params = {})
+          response = service.list_snapshots(volume_id, params)
           load(response.body["snapshots"])
         end
 

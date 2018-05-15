@@ -1,7 +1,5 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
 # TestSessions
 class TestSessions < Minitest::Test
   def self.test_order
@@ -22,7 +20,7 @@ class TestSessions < Minitest::Test
   end
 
   def test_b_session_login
-    response = @compute.sessions.login(:username => "username",:password => "password")
+    response = @compute.sessions.login(:username => "username", :password => "password")
 
     assert_equal true, response
   end

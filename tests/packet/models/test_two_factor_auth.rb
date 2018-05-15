@@ -1,7 +1,5 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
 # TestTwoFactorAuth
 class TestTwoFactorAuth < Minitest::Test
   def self.test_order
@@ -15,7 +13,7 @@ class TestTwoFactorAuth < Minitest::Test
 
   def test_a_enable_two_factor_auth
     # Perform Request
-    response = @compute.two_factor_auth.enable
+    response = @compute.two_factor_auth.enable("sms")
 
     # Assertions
     assert_equal true, response
@@ -23,7 +21,7 @@ class TestTwoFactorAuth < Minitest::Test
 
   def test_c_disable_two_factor_auth
     # Perform Request
-    response = @compute.two_factor_auth.disable
+    response = @compute.two_factor_auth.disable("sms")
 
     # Assertions
     assert_equal true, response

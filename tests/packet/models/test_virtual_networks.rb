@@ -1,29 +1,22 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestVirtualNetworks
 class TestVirtualNetworks < Minitest::Test
   def self.test_order
     :alpha
   end
-
+  
   def setup
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
     @project_id = "93125c2a-8b78-4d4f-a3c4-7367d6b7cca8"
-
-    @@device = @compute.devices.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
-
-    loop do
-      response = @@device.reload
-      break if response.state == "active"
-      sleep(3)
-    end
-    @@device_id = @@device.id
   end
 
   def test_a_create_virtual_network
+    device = @compute.devices.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
+    @@device_id = device.id
+
+    device.wait_for { ready? } if Fog.mock?
+
     response = @compute.virtual_networks.create(:project_id => @project_id, :description => "test", :facility => "ewr1", :vlan => 1, :vxlan => 1)
 
     assert_equal "test", response.description
@@ -49,7 +42,8 @@ class TestVirtualNetworks < Minitest::Test
 
   def test_f_assign_port
     eth1 = ""
-    @@device.provisioning_events.each do |port|
+    device = @compute.devices.get(@@device_id)
+    device.provisioning_events.each do |port|
       next unless port["network_ports"]
       port["network_ports"].each do |np|
         eth1 = np["id"] if np["name"] == "eth1"
@@ -62,8 +56,8 @@ class TestVirtualNetworks < Minitest::Test
 
   def test_g_unassign_port
     eth1 = ""
-
-    @@device.provisioning_events.each do |port|
+    device = @compute.devices.get(@@device_id)
+    device.provisioning_events.each do |port|
       next unless port["network_ports"]
       port["network_ports"].each do |np|
         eth1 = np["id"] if np["name"] == "eth1"
@@ -81,6 +75,7 @@ class TestVirtualNetworks < Minitest::Test
   end
 
   def test_i_cleanup
-    @@device.destroy
+    device = @compute.devices.get(@@device_id)
+    device.destroy
   end
 end

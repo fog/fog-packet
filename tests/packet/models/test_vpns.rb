@@ -1,8 +1,6 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
-# TestProjects
+# TestVpns
 class TestVpns < Minitest::Test
   def self.test_order
     :alpha

@@ -1,9 +1,6 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
-
-# TestFacilities
+# TestOperatingSystems
 class TestOperatingSystems < Minitest::Test
   def self.test_order
     :alpha

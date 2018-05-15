@@ -1,7 +1,4 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
-
-Fog.mock!
+require_relative "../../test_helper.rb"
 
 # TestDevices
 class TestDevices < Minitest::Test
@@ -22,15 +19,12 @@ class TestDevices < Minitest::Test
 
     @@device_id = device.id
 
-    loop do
-      d = device.reload
-      break if d.state == "active"
-      sleep(3)
-    end
+    Fog.timeout = 1200
+    device.wait_for { ready? }
   end
 
   def test_b_list_device
-    devices = @compute.devices.all(@project_id)
+    devices = @compute.devices.all(@project_id, :per_page => 1, :page => 1, :include => "project")
 
     assert !devices.empty?
   end
@@ -45,7 +39,6 @@ class TestDevices < Minitest::Test
     device = @compute.devices.get(@@device_id)
     device.hostname = "test02"
     device.update
-    # device = @compute.devices.get(@@device_id)
 
     assert_equal "test02", device.hostname
   end
@@ -56,38 +49,28 @@ class TestDevices < Minitest::Test
 
     assert_equal true, response
 
-    loop do
-      d = device.reload
-      break if d.state == "active"
-      sleep(3)
-    end
+    device.wait_for { ready? }
   end
 
   def test_f_poweroff_device
-    device = @compute.devices.get(@device_id)
+    device = @compute.devices.get(@@device_id)
 
     response = device.stop
     assert_equal true, response
 
-    loop do
-      d = device.reload
-      break if d.state == "inactive"
-      sleep(3)
-    end
+    device.wait_for { inactive? } unless Fog.mock?
   end
 
   def test_g_poweron_device
+    sleep(30) unless Fog.mock?
+
     device = @compute.devices.get(@@device_id)
 
     response = device.start
 
     assert_equal true, response
 
-    loop do
-      d = device.reload
-      break if d.state == "active"
-      sleep(3)
-    end
+    device.wait_for { ready? } unless Fog.mock?
   end
 
   def test_h_get_events
@@ -97,7 +80,7 @@ class TestDevices < Minitest::Test
   end
 
   def test_i_get_bandwidth
-    response = @compute.bandwidth.get(@@device_id)
+    response = @compute.bandwidth.get(@@device_id, :to => "12-12-2017", :from => "11-11-2017")
 
     assert_equal 200, response.status
   end

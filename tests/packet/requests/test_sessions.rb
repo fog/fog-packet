@@ -1,7 +1,5 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
 # TestSessions
 class TestSessions < Minitest::Test
   def self.test_order
@@ -13,7 +11,7 @@ class TestSessions < Minitest::Test
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
   end
 
-  def test_a_list_sessions
+  def test_request_a_list_sessions
     # Perform Request
     response = @compute.list_sessions
 
@@ -21,13 +19,13 @@ class TestSessions < Minitest::Test
     assert !response.body["sessions"].empty?
   end
 
-  def test_b_session_login
-    response = @compute.session_login(:username => "username",:password => "password")
+  def test_request_b_session_login
+    response = @compute.session_login(:username => "username", :password => "password")
 
     assert_equal 201, response.status
   end
 
-  def test_c_delete_session
+  def test_request_c_delete_session
     # Perform Request
     response = @compute.delete_session
     # Assertions

@@ -1,7 +1,5 @@
-require_relative "../../../lib/fog-packet"
-require "minitest/autorun"
+require_relative "../../test_helper.rb"
 
-Fog.mock!
 # TestNotifications
 class TestNotifications < Minitest::Test
   def self.test_order
@@ -13,7 +11,7 @@ class TestNotifications < Minitest::Test
     @compute = Fog::Compute::Packet.new(:packet_token => ENV["PACKET_TOKEN"])
   end
 
-  def test_a_list_notifications
+  def test_request_a_list_notifications
     # Perform Request
     response = @compute.list_notifications
 
@@ -23,7 +21,7 @@ class TestNotifications < Minitest::Test
     @@notification_id = response.body["notifications"][0]["id"]
   end
 
-  def test_b_get_notification
+  def test_request_b_get_notification
     # Perform Request
     response = @compute.get_notification(@@notification_id)
 
@@ -32,7 +30,7 @@ class TestNotifications < Minitest::Test
     assert_equal @@notification_id, response.body["id"]
   end
 
-  def test_c_update_notification
+  def test_request_c_update_notification
     response = @compute.update_notification(@@notification_id)
 
     assert_equal 200, response.status

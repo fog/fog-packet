@@ -17,7 +17,6 @@ module Fog
         def delete_snapshot(_storage_id, _snapshot_id)
           response = Excon::Response.new
           response.status = 204
-
           response
         end
       end

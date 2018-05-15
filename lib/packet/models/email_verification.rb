@@ -5,7 +5,6 @@ module Fog
       class EmailVerification < Fog::Collection
         def request(email)
           response = service.request_email_verification(email)
-
           true if response.status == 201
         end
 
