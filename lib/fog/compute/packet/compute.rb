@@ -11,7 +11,7 @@ module Fog
       recognizes :packet_url
 
       # Models
-      model_path "packet/models"
+      model_path "fog/compute/packet/models"
 
       model :plan
       collection :plans
@@ -103,7 +103,7 @@ module Fog
       collection :hardware_reservations
 
       # Requests
-      request_path "packet/requests"
+      request_path "fog/compute/packet/requests"
 
       request :list_plans
       request :list_projects

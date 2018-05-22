@@ -10,7 +10,7 @@ require "fog/json"
 module Fog
   # Compute
   module Compute
-    autoload :Packet, File.expand_path("../packet/compute", __FILE__)
+    autoload :Packet, File.expand_path("../fog/compute/packet/compute", __FILE__)
   end
 
   # Models
