@@ -12,10 +12,6 @@ module Fog
         attribute :devices
         attribute :project
         attribute :quantity
-
-        def initialize(attributes = {})
-          super
-        end
       end
     end
   end

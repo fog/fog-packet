@@ -7,12 +7,10 @@ $LOAD_PATH.unshift __LIB_DIR__ unless $LOAD_PATH.include?(__LIB_DIR__)
 require "fog/core"
 require "fog/json"
 
-require_relative "packet/compute"
-
 module Fog
   # Compute
   module Compute
-    autoload :Packet, File.expand_path("../packet/compute", __FILE__)
+    autoload :Packet, File.expand_path("../fog/compute/packet/compute", __FILE__)
   end
 
   # Models

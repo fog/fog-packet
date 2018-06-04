@@ -1,5 +1,5 @@
 # fog-packet
-WIP: Packet provider for Fog
+Packet provider for Fog
 
 ## Table of Contents
 
