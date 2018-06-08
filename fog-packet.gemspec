@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.email         = "jasmin@stackpointcloud.com"
   spec.summary       = "Module for the 'fog' gem to support Packet."
   spec.description   = "This library can be used as a module for 'fog' or as
-                        a standalone 1and1 provider."
+                        a standalone Packet provider."
   spec.homepage      = "https://github.com/StackPointCloud/fog-packet"
   spec.license       = "MIT"
 
