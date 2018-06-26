@@ -240,14 +240,17 @@ module Fog
       # Real
       class Real
         def initialize(options = {})
-          if options[:packet_token] == ""
+          if options[:packet_token] 
             @packet_token = options[:packet_token]
           else
             @packet_token = ENV["PACKET_TOKEN"]
           end
-          raise "Packet token is not present. Please pass it as an argument or set environment variable 'PACKET_TOKEN'." if @packet_token == ""
+
+          raise "Packet token is not present. Please pass it as an argument or set environment variable 'PACKET_TOKEN'." unless @packet_token
+
           @base_url = options[:packet_url] ? options[:packet_url] : "https://api.packet.net/" 
           @version = ""
+
           @header = {
             "X-Auth-Token" => @packet_token,
             "Content-Type" => "application/json"
@@ -294,12 +297,11 @@ module Fog
       # Mock
       class Mock
         def initialize(options = {})
-          if options[:packet_token] == ""
+          if options[:packet_token]
             @packet_token = options[:packet_token]
           else
             @packet_token = ENV["PACKET_TOKEN"]
           end
-          
           raise "Packet token is not present. Please pass it as an argument or set environment variable 'PACKET_TOKEN'." unless @packet_token
           @base_url = options[:packet_url] ? options[:packet_url] : "https://api.packet.net/"
         end
