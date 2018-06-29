@@ -1,5 +1,5 @@
 # fog-packet
-Packet provider for Fog
+WIP: Packet provider for Fog
 
 ## Table of Contents
 
@@ -33,33 +33,69 @@ Packet provider for Fog
   * [Project Transfer Requests](#project-transfer-requests)
   * [Hardware Reservations](#hardware-reservations)
 - [Unit Tests](#unit-tests)
+
 # Requirements 
 
 1. Ruby programming language
 
 # Installation
 
-1. Clone the repository
-2. In the root of the repository run:
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'fog-packet'
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install fog-packet
+
+# Build
+
+In some cases it might be necessary to manually build the package from source:
+
+1. Clone the repository:
 
 ```
-gem build fog-packet.gemspec 
+$ git clone https://github.com/fog/fog-packet
+```
+
+2. Change into the repository root and build the gem package:
+
+```
+$ cd fog-packet
+$ gem build fog-packet.gemspec
 ```
 
 3. Install the Ruby gem:
 
 ```
-gem install fog-packet-1.0.1.gem 
-```  
+$ gem install fog-packet-1.0.1.gem
+```
 
 # Authentication 
-*NOTE:* At the moment Packet fog provider is not yet part of the fog project the provider will have to be initialized like this:
 
 Provide your credentials when creating a compute object:
 
-```
-compute = Fog::Compute::Packet.new(packet_token: ENV['PACKET_TOKEN'])
+```ruby
+require 'fog-packet'
+
+compute = Fog::Compute::Packet.new(packet_token: 'PACKET_TOKEN')
 ```  
+
+Alternatively, the Packet token can be supplied as an environment variable:
+
+    $ export PACKET_TOKEN="PACKET_TOKEN"
+
+```ruby
+require 'fog-packet'
+
+compute = Fog::Compute::Packet.new()
+```
 
 # Operations:
 
