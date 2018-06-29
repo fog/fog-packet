@@ -35,7 +35,7 @@ Packet provider for Fog
 - [Unit Tests](#unit-tests)
 # Requirements 
 
-1. Ruby programming language
+1. [Ruby](http://ruby-lang.org/) version 2.2.0 and above
 
 # Installation
 
