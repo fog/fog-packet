@@ -1,12 +1,12 @@
 # fog-packet
-WIP: Packet provider for Fog
 
 ## Table of Contents
 
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Authentication](#authentication)
-- [Operations](#operations)
+* [Packet Provider for Fog](#packet-provider-fog-fog)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Authentication](#authentication)
+* [Operations](#operations)
   * [Devices](#devices)
   * [Volumes](#volumes)
   * [Snapshots](#snapshots)
@@ -32,11 +32,18 @@ WIP: Packet provider for Fog
   * [Payment Methods](#payment-methods)
   * [Project Transfer Requests](#project-transfer-requests)
   * [Hardware Reservations](#hardware-reservations)
-- [Unit Tests](#unit-tests)
+* [Unit Tests](#unit-tests)
+* [Support](#support)
+
+# Packet Provider for Fog
+
+[Packet](https://www.packet.net/) provides an API drive-driven bare metal platform that brings the price and performance benefits of bare metal servers and network to the cloud.
+
+[Fog](https://fog.io/) is a Ruby library that provides a consistent framework for interacting with the various cloud providers and their services. The Packet provider for Fog adds powerful bare metal to the growing list of cloud services.
 
 # Requirements 
 
-1. Ruby programming language
+1. [Ruby](https://www.ruby-lang.org/) 2.2 and above.
 
 # Installation
 
@@ -48,11 +55,15 @@ gem 'fog-packet'
 
 And then execute:
 
-    $ bundle
+```bash
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install fog-packet
+```bash
+$ gem install fog-packet
+```
 
 # Build
 
@@ -60,20 +71,20 @@ In some cases it might be necessary to manually build the package from source:
 
 1. Clone the repository:
 
-```
+```bash
 $ git clone https://github.com/fog/fog-packet
 ```
 
 2. Change into the repository root and build the gem package:
 
-```
+```bash
 $ cd fog-packet
 $ gem build fog-packet.gemspec
 ```
 
 3. Install the Ruby gem:
 
-```
+```bash
 $ gem install fog-packet-1.0.1.gem
 ```
 
@@ -97,7 +108,7 @@ require 'fog-packet'
 compute = Fog::Compute::Packet.new()
 ```
 
-# Operations:
+# Operations
 
 ## Devices
 
@@ -1210,3 +1221,11 @@ Run real tests:
 ```bash
 FOG_MOCK=false rake test
 ```
+
+# Support
+
+For help with this package:
+
+* Open up a GitHub issue [here](https://github.com/fog/fog-packet/issues).
+* Contact the [Packet Community Slack](http://slack.packet.net) or on Freenode IRC in the #packethost channel.
+* Search the [Packet Knowledge](http://help.packet.net/)
