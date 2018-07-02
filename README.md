@@ -1,12 +1,16 @@
 # fog-packet
-Packet provider for Fog
+
+![Gem Version](https://badge.fury.io/rb/fog-packet.svg)
+[![Build Status](https://travis-ci.org/fog/fog-packet.svg?branch=master)](https://travis-ci.org/fog/fog-packet)
 
 ## Table of Contents
 
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Authentication](#authentication)
-- [Operations](#operations)
+* [Packet Provider for Fog](#packet-provider-for-fog)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Build](#build)
+* [Authentication](#authentication)
+* [Operations](#operations)
   * [Devices](#devices)
   * [Volumes](#volumes)
   * [Snapshots](#snapshots)
@@ -32,36 +36,83 @@ Packet provider for Fog
   * [Payment Methods](#payment-methods)
   * [Project Transfer Requests](#project-transfer-requests)
   * [Hardware Reservations](#hardware-reservations)
-- [Unit Tests](#unit-tests)
+* [Unit Tests](#unit-tests)
+* [Support](#support)
+
+# Packet Provider for Fog
+
+[Packet](https://www.packet.net/) provides an API drive-driven bare metal platform that brings the price and performance benefits of bare metal servers and network to the cloud.
+
+[Fog](https://fog.io/) is a Ruby library that provides a consistent framework for interacting with the various cloud providers and their services. The Packet provider for Fog adds powerful bare metal to the growing list of cloud services.
+
 # Requirements 
 
-1. [Ruby](http://ruby-lang.org/) version 2.2.0 and above
+1. [Ruby](https://www.ruby-lang.org/) version 2.2 and above.
 
 # Installation
 
-1. Clone the repository
-2. In the root of the repository run:
+Add this line to your application's Gemfile:
 
+```ruby
+gem 'fog-packet'
 ```
-gem build fog-packet.gemspec 
+
+And then execute:
+
+```bash
+$ bundle
+```
+
+Or install it yourself as:
+
+```bash
+$ gem install fog-packet
+```
+
+# Build
+
+In some cases it might be necessary to manually build the package from source:
+
+1. Clone the repository:
+
+```bash
+$ git clone https://github.com/fog/fog-packet
+```
+
+2. Change into the repository root and build the gem package:
+
+```bash
+$ cd fog-packet
+$ gem build fog-packet.gemspec
 ```
 
 3. Install the Ruby gem:
 
+```bash
+$ gem install fog-packet-1.0.1.gem
 ```
-gem install fog-packet-1.0.1.gem 
-```  
 
 # Authentication 
-*NOTE:* At the moment Packet fog provider is not yet part of the fog project the provider will have to be initialized like this:
 
 Provide your credentials when creating a compute object:
 
-```
-compute = Fog::Compute::Packet.new(packet_token: ENV['PACKET_TOKEN'])
+```ruby
+require 'fog-packet'
+
+compute = Fog::Compute::Packet.new(packet_token: 'PACKET_TOKEN')
 ```  
 
-# Operations:
+Alternatively, the Packet token can be supplied as an environment variable:
+
+    $ export PACKET_TOKEN="PACKET_TOKEN"
+
+```ruby
+require 'fog-packet'
+
+compute = Fog::Compute::Packet.new()
+```
+
+# Operations
 
 ## Devices
 
@@ -1161,7 +1212,7 @@ Move a hardware reservation to another project.
 hardware_reservation.move(project_id) 
 ```
 
-## Unit tests
+# Unit Tests
 
 Run mock tests:
 
@@ -1174,3 +1225,11 @@ Run real tests:
 ```bash
 FOG_MOCK=false rake test
 ```
+
+# Support
+
+For help with this package:
+
+* Open up a GitHub issue [here](https://github.com/fog/fog-packet/issues).
+* Contact the [Packet Community Slack](http://slack.packet.net) or on Freenode IRC in the #packethost channel.
+* Search the [Packet Help Center](http://help.packet.net/).
