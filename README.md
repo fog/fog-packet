@@ -5,6 +5,7 @@
 * [Packet Provider for Fog](#packet-provider-for-fog)
 * [Requirements](#requirements)
 * [Installation](#installation)
+* [Build](#build)
 * [Authentication](#authentication)
 * [Operations](#operations)
   * [Devices](#devices)
@@ -1208,7 +1209,7 @@ Move a hardware reservation to another project.
 hardware_reservation.move(project_id) 
 ```
 
-## Unit tests
+# Unit Tests
 
 Run mock tests:
 
