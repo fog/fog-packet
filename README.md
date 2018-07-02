@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-* [Packet Provider for Fog](#packet-provider-fog-fog)
+* [Packet Provider for Fog](#packet-provider-for-fog)
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Authentication](#authentication)
