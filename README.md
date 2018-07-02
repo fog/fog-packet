@@ -1228,4 +1228,4 @@ For help with this package:
 
 * Open up a GitHub issue [here](https://github.com/fog/fog-packet/issues).
 * Contact the [Packet Community Slack](http://slack.packet.net) or on Freenode IRC in the #packethost channel.
-* Search the [Packet Knowledge](http://help.packet.net/)
+* Search the [Packet Help Center](http://help.packet.net/).
