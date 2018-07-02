@@ -47,7 +47,7 @@
 
 # Requirements 
 
-1. [Ruby](https://www.ruby-lang.org/) 2.2 and above.
+1. [Ruby](https://www.ruby-lang.org/) version 2.2 and above.
 
 # Installation
 
