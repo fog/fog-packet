@@ -302,8 +302,6 @@ module Fog
           else
             @packet_token = ENV["PACKET_TOKEN"]
           end
-          raise "Packet token is not present. Please pass it as an argument or set environment variable 'PACKET_TOKEN'." unless @packet_token
-          @base_url = options[:packet_url] ? options[:packet_url] : "https://api.packet.net/"
         end
 
         def data
