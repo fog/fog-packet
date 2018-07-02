@@ -330,7 +330,7 @@ Available parameters
 | NAME| TYPE | DESCRIPTION | REQUIRED |
 |---|---|---|---|
 | facility | string | Facility code | Yes |
-| quatity | int|  | Yes |
+| quantity | int|  | Yes |
 | type | string |  | Yes |
 | comments | string |  | No |
 
