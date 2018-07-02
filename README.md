@@ -1,5 +1,8 @@
 # fog-packet
 
+![Gem Version](https://badge.fury.io/rb/fog-packet.svg)
+[![Build Status](https://travis-ci.org/fog/fog-packet.svg?branch=master)](https://travis-ci.org/fog/fog-packet)
+
 ## Table of Contents
 
 * [Packet Provider for Fog](#packet-provider-for-fog)
