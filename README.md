@@ -555,19 +555,17 @@ Available parameters
 
 ## List SSH Keys
 
-Returns a collection of the user’s ssh keys, unless project ID is specified then it returns a collection of the project's ssh keys.
+Returns a collection of the current **user** SSH keys. The UUIDs are used with the device.create `user_ssh_keys` property.
 
-To fetch all SSH keys of the current user:
 ```ruby
 response = compute.ssh_keys.all
 ```
-UUIDs from this list can be used with device.create passing them as 'user_ssh_keys'
 
-To fetch all SSH keys belonging to the project:
+The following example returns a collection of the **project** SSH keys. These UUIDs are used with the device.create `project_ssh_keys` property.
+
 ```ruby
 response = compute.ssh_keys.all(project_id)
 ```
-UUID from this list can be used with device.create passing them as 'project_ssh_keys'
 
 Optional parameters 
 
