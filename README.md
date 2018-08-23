@@ -93,8 +93,8 @@ Available parameters
 | spot_price_max | string | | No |
 | termination_time | string | | No |
 | tags | string | | No |
-| project_ssh_keys | string | | No |
-| user_ssh_keys | string | | No |
+| project_ssh_keys | collections of strings | | No |
+| user_ssh_keys | collections of strings | | No |
 | features | string | | No |
 
 ## Retrieve a device
@@ -557,13 +557,17 @@ Available parameters
 
 Returns a collection of the user’s ssh keys, unless project ID is specified then it returns a collection of the project's ssh keys.
 
+To fetch all SSH keys of the current user:
 ```ruby
 response = compute.ssh_keys.all
 ```
+UUIDs from this list can be used with device.create passing them as 'user_ssh_keys'
 
+To fetch all SSH keys belonging to the project:
 ```ruby
 response = compute.ssh_keys.all(project_id)
 ```
+UUID from this list can be used with device.create passing them as 'project_ssh_keys'
 
 Optional parameters 
 
