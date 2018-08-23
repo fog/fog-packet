@@ -2,7 +2,7 @@ module Fog
   module Compute
     class Packet
       # Device Model
-      class Device < Fog::Model
+      class Device < Fog::Compute::Server
         identity :id
 
         attribute :short_id
@@ -73,6 +73,10 @@ module Fog
           merge_attributes(response.body)
         end
 
+        def public_ip_address
+          ip_addresses[0]["address"]
+        end
+
         def update
           requires :id
 
@@ -129,6 +133,24 @@ module Fog
 
         def inactive?
           state == "inactive"
+        end
+
+        def setup(credentials = {})
+          requires :ssh_ip_address, :username
+
+          # commands = [
+          #   %{mkdir .ssh},
+          #   %{passwd -l #{username}},
+          #   %{echo "#{Fog::JSON.encode(Fog::JSON.sanitize(attributes))}" >> ~/attributes.json}
+          # ]
+          # if public_key
+          #   commands << %{echo "#{public_key}" >> ~/.ssh/authorized_keys}
+          # end
+
+          # wait for aws to be ready
+          # wait_for { sshable?(credentials) }
+
+          Fog::SSH.new(ssh_ip_address, username, credentials)
         end
       end
     end
