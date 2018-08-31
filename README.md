@@ -70,7 +70,7 @@ compute = Fog::Compute::Packet.new(packet_token: ENV['PACKET_TOKEN'])
 Creates a new device and provisions it in our datacenter. 
 
 ```ruby
-device = compute.devices.create(:project_id => project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
+device = compute.devices.create(:project_id => project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable", :user_ssh_keys => ["ssh_key_id"])
 ```
 
 Available parameters
