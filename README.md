@@ -93,8 +93,8 @@ Available parameters
 | spot_price_max | string | | No |
 | termination_time | string | | No |
 | tags | string | | No |
-| project_ssh_keys | collections of strings | | No |
-| user_ssh_keys | collections of strings | | No |
+| project_ssh_keys | collection of strings | | No |
+| user_ssh_keys | collection of strings | | No |
 | features | string | | No |
 
 ## Retrieve a device
@@ -842,7 +842,7 @@ license = {
   :project_id => project_id, 
   :description => "test01", 
   :size => 1,
-  :license_product_id => "blah"
+  :license_product_id => "license_product_id"
 }
 
 license = compute.licenses.create(license)
