@@ -317,7 +317,7 @@ Optional parameters
 ## Delete a snapshot
 Deletes the specified snapshot
 ```ruby
-response = snapshot.destroy(volume_id, snapshot_id)
+response = snapshot.destroy
 ```     
 
 ## IP addresses
