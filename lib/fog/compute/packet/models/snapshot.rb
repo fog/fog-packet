@@ -22,7 +22,7 @@ module Fog
         end
 
         def destroy
-          requires :id
+          requires :id, :volume
     
           volume_id = volume["href"].split("/")[-1]
           response = service.delete_snapshot(volume_id, id)
