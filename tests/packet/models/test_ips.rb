@@ -12,11 +12,11 @@ class TestIps < Minitest::Test
   end
 
   def test_a_reserve_ip
-    device = @compute.devices.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
+    server = @compute.servers.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
 
-    device.wait_for { ready? }
+    server.wait_for { ready? }
 
-    @@device_id = device.id
+    @@server_id = server.id
 
     response = @compute.ips.create(:project_id => @project_id, :facility => "ewr1", :quantity => 2, :type => "global_ipv4", :comments => "test comment")
 
@@ -38,7 +38,7 @@ class TestIps < Minitest::Test
 
   def test_d_assign
     ip = @compute.ips.get(@@ip_id)
-    response = ip.assign(@@device_id)
+    response = ip.assign(@@server_id)
 
     assert response
   end

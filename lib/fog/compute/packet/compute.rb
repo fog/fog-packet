@@ -22,6 +22,9 @@ module Fog
       model :facility
       collection :facilities
 
+      model :server
+      collection :servers
+
       model :device
       collection :devices
 
