@@ -89,7 +89,7 @@ $ gem build fog-packet.gemspec
 3. Install the Ruby gem:
 
 ```bash
-$ gem install fog-packet-1.0.1.gem
+$ gem install fog-packet-1.1.0.gem
 ```
 
 # Authentication 
