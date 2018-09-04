@@ -2,7 +2,7 @@ module Fog
   module Compute
     class Packet
       # Device Model
-      class Device < Fog::Model
+      class Device < Fog::Compute::Server
         identity :id
 
         attribute :short_id
@@ -71,6 +71,10 @@ module Fog
 
           response = service.create_device(project_id, options)
           merge_attributes(response.body)
+        end
+
+        def public_ip_address
+          ip_addresses[0]["address"]
         end
 
         def update

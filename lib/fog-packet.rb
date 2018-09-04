@@ -6,6 +6,7 @@ $LOAD_PATH.unshift __LIB_DIR__ unless $LOAD_PATH.include?(__LIB_DIR__)
 # Fog-OneAndOne Core Dependencies
 require "fog/core"
 require "fog/json"
+require "fog/compute/models/server"
 
 module Fog
   # Compute
