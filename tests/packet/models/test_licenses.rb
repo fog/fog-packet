@@ -17,7 +17,7 @@ class TestLicenses < Minitest::Test
       :project_id => @project_id,
       :description => "test01",
       :size => "1",
-      :license_product_id => "blah"
+      :license_product_id => "license_product_id"
     }
 
     license = @compute.licenses.create(license)

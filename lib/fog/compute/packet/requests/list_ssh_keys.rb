@@ -4,8 +4,6 @@ module Fog
       # Real
       class Real
         def list_ssh_keys(project_id = "", params = {})
-          p project_id
-          p params
           url = "/ssh-keys"
           if project_id.class == Hash
             params = project_id
