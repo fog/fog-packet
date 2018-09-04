@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "fog-packet"
-  spec.version       = "1.0.1"
+  spec.version       = "1.1.0"
   spec.authors       = ["Jasmin Gacic"]
   spec.email         = "jasmin@stackpointcloud.com"
   spec.summary       = "Module for the 'fog' gem to support Packet."

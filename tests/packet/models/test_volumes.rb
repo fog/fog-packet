@@ -12,10 +12,10 @@ class TestVolumes < Minitest::Test
   end
 
   def test_a_create_volume
-    device = @compute.devices.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
+    server = @compute.servers.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
 
-    device.wait_for { ready? }
-    @@device_id = device.id
+    server.wait_for { ready? }
+    @@server_id = server.id
 
     @@volume = @compute.volumes.create(:project_id => @project_id, :facility => "ewr1", :plan => "storage_1", :size => 20, :description => "test description", :billing_cycle => "hourly")
 
@@ -46,7 +46,7 @@ class TestVolumes < Minitest::Test
   end
 
   def test_e_attach_volume
-    response = @@volume.attach(@@device_id)
+    response = @@volume.attach(@@server_id)
     @@attachment_id = response.id
 
     assert response
@@ -64,7 +64,7 @@ class TestVolumes < Minitest::Test
   end
 
   def test_h_cleanup
-    device = @compute.devices.get(@@device_id)
-    device.destroy
+    server = @compute.servers.get(@@server_id)
+    server.destroy
   end
 end

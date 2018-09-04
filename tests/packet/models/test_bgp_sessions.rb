@@ -12,14 +12,14 @@ class TestBGPSessions < Minitest::Test
   end
 
   def test_a_create_bgp_session
-    device = @compute.devices.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
-    @@device_id = device.id
+    server = @compute.servers.create(:project_id => @project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
+    @@server_id = server.id
 
-    device.wait_for { ready? }
+    server.wait_for { ready? }
 
     # Perform Request
     address_family = "ipv4"
-    response = @compute.bgp_sessions.create(:device_id => @@device_id, :address_family => address_family)
+    response = @compute.bgp_sessions.create(:device_id => @@server_id, :address_family => address_family)
 
     # Assertions
     assert_equal address_family, response.address_family
@@ -34,7 +34,7 @@ class TestBGPSessions < Minitest::Test
   end
 
   def test_d_list_bgp_sessions
-    response = @compute.bgp_sessions.all(@@device_id)
+    response = @compute.bgp_sessions.all(@@server_id)
 
     assert !response.empty?
   end
@@ -47,6 +47,6 @@ class TestBGPSessions < Minitest::Test
   end
 
   def test_z_cleanup
-    @compute.delete_device(@@device_id)
+    @compute.delete_device(@@server_id)
   end
 end

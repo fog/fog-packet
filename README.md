@@ -11,7 +11,7 @@
 * [Build](#build)
 * [Authentication](#authentication)
 * [Operations](#operations)
-  * [Devices](#devices)
+  * [Servers](#servers)
   * [Volumes](#volumes)
   * [Snapshots](#snapshots)
   * [IP Addresses](#ip-addresses)
@@ -89,7 +89,7 @@ $ gem build fog-packet.gemspec
 3. Install the Ruby gem:
 
 ```bash
-$ gem install fog-packet-1.0.1.gem
+$ gem install fog-packet-1.1.0.gem
 ```
 
 # Authentication 
@@ -114,21 +114,21 @@ compute = Fog::Compute::Packet.new()
 
 # Operations
 
-## Devices
+## Servers
 
-## Create a device
+## Create a server
 
-Creates a new device and provisions it in our datacenter. 
+Creates a new server and provisions it in our datacenter. 
 
-```ruby
 device = compute.devices.create(:project_id => project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable", :user_ssh_keys => ["ssh_key_id"])
+
 ```
 
 Available parameters
 
 | NAME| TYPE | DESCRIPTION | REQUIRED |
 |---|---|---|---|
-| project_id | string | 	Project UUID  under which device will be created| Yes |
+| project_id | string | 	Project UUID  under which server will be created| Yes |
 | hostname | string | The hostname of the server. | Yes |
 | plan | string | Plan name| Yes |
 | facility | string | Facility code | Yes |
@@ -148,20 +148,20 @@ Available parameters
 | user_ssh_keys | collection of strings | | No |
 | features | string | | No |
 
-## Retrieve a device
+## Retrieve a server
 
-Gets details about a specified device
+Gets details about a specified server
 
 ```ruby
-response = compute.devices.get(device_id)
+response = compute.servers.get(server_id)
 ```
 
-## Update a device
-Updates a device
+## Update a server
+Updates a server
 ```ruby
-device.hostname= 'test02'
+server.hostname= 'test02'
 
-response = device.update
+response = server.update
 ```
 
 Available parameters
@@ -177,46 +177,46 @@ Available parameters
 | locked | string | | No |
 | spot_instance | string | | No |
 
-## Reboot device
-Reboots the specified device
+## Reboot a server
+Reboots the specified server
 
 ```ruby
-response = device.reboot
+response = server.reboot
 ```
 
-## Power off device
-Powers off the specified device
+## Power off server
+Powers off the specified server
 
 ```ruby
-response = device.stop
+response = server.stop
 ```
 
-## Power on device
-Powers on the specified device
+## Power on server
+Powers on the specified server
 
 ```ruby
-response = device.start
+response = server.start
 ```
 
-## Delete a device
+## Delete a server
 
-Deletes the specified devices
+Deletes the specified servers
 
 ```ruby
-response = device.destroy
+response = server.destroy
 ```
 
-## Get Device Events
-Returns a list of events pertaining to a specific device.
+## Get Server Events
+Returns a list of events pertaining to a specific server.
 
 ```ruby
-events = compute.events.all(device_id)
+events = compute.events.all(server_id)
 ```
-## Get Device Bandwidth
+## Get Server Bandwidth
 Retrieve an instance bandwidth for a given period of time.
 
 ```ruby
-bandwidth = compute.bandwidth.get(device_id, "2018-03-10", "2018-04-10")
+bandwidth = compute.bandwidth.get(server_id, "2018-03-10", "2018-04-10")
 ```
 
 ## Volumes
@@ -267,15 +267,15 @@ Optional parameters
 
 ## Attach a volume
 
-Attaches a volume to the specified device
+Attaches a volume to the specified server
 
 ```ruby
-response = volume.attach(device_id)
+response = volume.attach(server_id)
 ```
 
 ## Detach a volume
 
-Detaches a volume from the specified device
+Detaches a volume from the specified server
 
 ```ruby
 response = volume.detach
@@ -355,10 +355,10 @@ Optional parameters
 | include | string | For resources that contain collections of other resources, the Packet API will return links to the other resources by default. | 
 
 ## Assign an IP address
-Assigns an IP address to the specified devices
+Assigns an IP address to the specified servers
 
 ```ruby
-response = ip.assign(device_id)
+response = ip.assign(server_id)
 ```
 
 ## Unassign IP address
@@ -712,19 +712,19 @@ response = compute.batches.get(batch_id)
 Creates a BGP session.
 
 ```ruby
-response = compute.bgp_sessions.create(:device_id => device_id, :address_family => address_family)
+response = compute.bgp_sessions.create(:device_id => server_id, :address_family => address_family)
 ```
 
 | NAME| TYPE | DESCRIPTION | REQUIRED |
 |---|---|---|---|
-| device_id | string | UUID of a device | Yes |
+| device_id | string | UUID of a server | Yes |
 | address_family | string | Either 'ipv4' or 'ipv6' | Yes |
 
 ## List BGP sessions
-Provides a listing of available BGP sessions for the device.
+Provides a listing of available BGP sessions for the server.
 
 ```ruby
-response = compute.bgp_sessions.all(device_id)
+response = compute.bgp_sessions.all(server_id)
 ```
 
 ## Retrieve a BGP session
