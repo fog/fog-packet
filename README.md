@@ -120,8 +120,8 @@ compute = Fog::Compute::Packet.new()
 
 Creates a new server and provisions it in our datacenter. 
 
-```ruby
-server = compute.servers.create(:project_id => project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable")
+device = compute.devices.create(:project_id => project_id, :facility => "ewr1", :plan => "baremetal_0", :hostname => "test01", :operating_system => "coreos_stable", :user_ssh_keys => ["ssh_key_id"])
+
 ```
 
 Available parameters
@@ -144,8 +144,8 @@ Available parameters
 | spot_price_max | string | | No |
 | termination_time | string | | No |
 | tags | string | | No |
-| project_ssh_keys | string | | No |
-| user_ssh_keys | string | | No |
+| project_ssh_keys | collection of strings | | No |
+| user_ssh_keys | collection of strings | | No |
 | features | string | | No |
 
 ## Retrieve a server
@@ -317,7 +317,7 @@ Optional parameters
 ## Delete a snapshot
 Deletes the specified snapshot
 ```ruby
-response = snapshot.destroy(volume_id, snapshot_id)
+response = snapshot.destroy
 ```     
 
 ## IP addresses
@@ -606,11 +606,13 @@ Available parameters
 
 ## List SSH Keys
 
-Returns a collection of the user’s ssh keys, unless project ID is specified then it returns a collection of the project's ssh keys.
+Returns a collection of the current **user** SSH keys. The UUIDs are used with the device.create `user_ssh_keys` property.
 
 ```ruby
 response = compute.ssh_keys.all
 ```
+
+The following example returns a collection of the **project** SSH keys. These UUIDs are used with the device.create `project_ssh_keys` property.
 
 ```ruby
 response = compute.ssh_keys.all(project_id)
@@ -891,7 +893,7 @@ license = {
   :project_id => project_id, 
   :description => "test01", 
   :size => 1,
-  :license_product_id => "blah"
+  :license_product_id => "license_product_id"
 }
 
 license = compute.licenses.create(license)

@@ -30,7 +30,7 @@ class TestSnapshots < Minitest::Test
   end
 
   def test_c_delete_snapshot
-    response = @@snapshot.destroy(@@volume_id)
+    response = @@snapshot.destroy()
 
     assert_equal true, response
   end

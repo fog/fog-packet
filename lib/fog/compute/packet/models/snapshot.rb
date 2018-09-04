@@ -21,9 +21,10 @@ module Fog
           true if response.status == 202
         end
 
-        def destroy(volume_id)
-          requires :id
-
+        def destroy
+          requires :id, :volume
+    
+          volume_id = volume["href"].split("/")[-1]
           response = service.delete_snapshot(volume_id, id)
           true if response.status == 204
         end
